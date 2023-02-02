@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.data.model.standings
+package com.edwinkapkei.formula1.data.model.driverStandings
 
 
 import com.google.gson.annotations.SerializedName

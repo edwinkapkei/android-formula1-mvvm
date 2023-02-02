@@ -1,6 +1,7 @@
-package com.edwinkapkei.formula1.data.model.standings
+package com.edwinkapkei.formula1.data.model.driverStandings
 
 
+import com.edwinkapkei.formula1.data.model.drivers.Driver
 import com.google.gson.annotations.SerializedName
 
 data class DriverStanding(
