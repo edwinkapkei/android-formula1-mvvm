@@ -8,7 +8,7 @@ import retrofit2.http.GET
 
 interface F1APIService {
 
-    @GET("api/f1/current.json")
+    @GET("api/f1/2023.json")
     suspend fun getCurrentSchedule(): Response<ScheduleResponse>
 
     @GET("api/f1/current/drivers.json")
