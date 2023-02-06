@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/scheduleFragment"
         android:name="com.edwinkapkei.formula1.views.schedule.ScheduleFragment"
-        android:label="fragment_schedule"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/driversFragment"
         android:name="com.edwinkapkei.formula1.views.drivers.DriversFragment"
-        android:label="fragment_drivers"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_drivers" />
     <fragment
         android:id="@+id/standingsFragment"
         android:name="com.edwinkapkei.formula1.views.standings.StandingsFragment"
-        android:label="fragment_standings"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_standings" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.views.di
+package com.edwinkapkei.formula1.di
 
 import com.edwinkapkei.formula1.BuildConfig
 import com.edwinkapkei.formula1.data.api.F1APIService
@@ -19,7 +19,7 @@ class NetModule {
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("")
+            .baseUrl("https://ergast.com/")
             .build()
     }
 

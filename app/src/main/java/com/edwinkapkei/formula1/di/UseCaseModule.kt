@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.views.di
+package com.edwinkapkei.formula1.di
 
 import com.edwinkapkei.formula1.domain.repository.MainRepository
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriverStandingsUseCase

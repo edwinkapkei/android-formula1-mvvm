@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.views.di
+package com.edwinkapkei.formula1.di
 
 import android.app.Application
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentScheduleUseCase
