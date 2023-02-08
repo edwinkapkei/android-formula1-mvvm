@@ -71,7 +71,7 @@ class F1APIServiceTest {
 
 
             assertThat(responseBody).isNotNull()
-            assertThat(request.path).isEqualTo("/api/f1/current/drivers.json")
+            assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
         }
     }
 
@@ -82,22 +82,22 @@ class F1APIServiceTest {
             val responseBody = f1APIService.getCurrentDrivers().body()
 
             assertThat(responseBody).isNotNull()
-            val drivers =responseBody!!.mRData.driverTable.drivers
-            val driver = drivers[0]
+            val drivers =responseBody!!.mRData.standingsTable.standingsLists[0].driverStandings
+            val driver = drivers[18]
             val driver2 = drivers[5]
 
-            assertThat(driver.driverId).isEqualTo("albon")
-            assertThat(driver2.driverId).isEqualTo("hamilton")
-            assertThat(driver.permanentNumber).isEqualTo("23")
-            assertThat(driver2.permanentNumber).isEqualTo("44")
+            assertThat(driver.driver.driverId).isEqualTo("albon")
+            assertThat(driver2.driver.driverId).isEqualTo("hamilton")
+            assertThat(driver.points).isEqualTo("4")
+            assertThat(driver2.points).isEqualTo("240")
         }
     }
 
     @Test
     fun getCurrentDriverStandings_sentRequest_receivedExpected() {
         runBlocking {
-            enqueueMockResponse("current_driver_standings.json")
-            val responseBody = f1APIService.getCurrentDriverStandings().body()
+            enqueueMockResponse("current_drivers.json")
+            val responseBody = f1APIService.getCurrentDrivers().body()
             val request = mockWebServer.takeRequest()
 
 
@@ -105,19 +105,18 @@ class F1APIServiceTest {
             assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
         }
     }
-
     @Test
-    fun getCurrentDriverStandings_sentRequest_receivedCorrectContent() {
+    fun getCurrentConstructors_sentRequest_receivedCorrectContent() {
         runBlocking {
-            enqueueMockResponse("current_driver_standings.json")
-            val responseBody = f1APIService.getCurrentDriverStandings().body()
+            enqueueMockResponse("current_constructors.json")
+            val responseBody = f1APIService.getCurrentConstructors().body()
 
             assertThat(responseBody).isNotNull()
-            val drivers =responseBody!!.mRData.standingsTable.standingsLists[0].driverStandings
-            val driver = drivers[1]
+            val constructors =responseBody!!.mRData.standingsTable.standingsLists[0].constructorStandings
+            val team = constructors[1]
 
-            assertThat(driver.points).isEqualTo("308")
-            assertThat(driver.driver.driverId).isEqualTo("leclerc")
+            assertThat(team.points).isEqualTo("554")
+            assertThat(team.constructor.constructorId).isEqualTo("ferrari")
         }
     }
 

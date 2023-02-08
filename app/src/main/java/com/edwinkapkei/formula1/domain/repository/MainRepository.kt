@@ -1,8 +1,8 @@
 package com.edwinkapkei.formula1.domain.repository
 
-import com.edwinkapkei.formula1.data.model.drivers.DriversResponse
+import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
+import com.edwinkapkei.formula1.data.model.driver.DriversResponse
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
-import com.edwinkapkei.formula1.data.model.driverStandings.DriverStandingsResponse
 import com.edwinkapkei.formula1.data.util.RequestState
 
 interface MainRepository {
@@ -11,5 +11,5 @@ interface MainRepository {
 
     suspend fun getCurrentDrivers(): RequestState<DriversResponse>
 
-    suspend fun getCurrentDriverStandings(): RequestState<DriverStandingsResponse>
+    suspend fun getCurrentConstructors(): RequestState<ConstructorsResponse>
 }

@@ -1,7 +1,7 @@
 package com.edwinkapkei.formula1.di
 
 import com.edwinkapkei.formula1.domain.repository.MainRepository
-import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriverStandingsUseCase
+import com.edwinkapkei.formula1.domain.usecase.GetCurrentConstructorsUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriversUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentScheduleUseCase
 import dagger.Module
@@ -28,7 +28,7 @@ class UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideCurrentDriverStandingsUseCase(mainRepository: MainRepository): GetCurrentDriverStandingsUseCase {
-        return GetCurrentDriverStandingsUseCase(mainRepository)
+    fun provideCurrentConstructorsUseCase(mainRepository: MainRepository): GetCurrentConstructorsUseCase {
+        return GetCurrentConstructorsUseCase(mainRepository)
     }
 }

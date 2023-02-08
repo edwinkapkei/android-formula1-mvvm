@@ -9,7 +9,7 @@
         android:icon="@drawable/steering"
         android:title="@string/drivers" />
     <item
-        android:id="@+id/standingsFragment"
+        android:id="@+id/constructorsFragment"
         android:icon="@drawable/podium"
         android:title="@string/standings" />
 </menu>

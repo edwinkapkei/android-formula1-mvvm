@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.data.model.drivers
+package com.edwinkapkei.formula1.data.model.driver
 
 
 import com.google.gson.annotations.SerializedName

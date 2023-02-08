@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
 
         val appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.scheduleFragment, R.id.driversFragment, R.id.standingsFragment))
+            AppBarConfiguration(setOf(R.id.scheduleFragment, R.id.driversFragment, R.id.constructorsFragment))
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         binding.toolbar.title = getString(R.string.app_name)

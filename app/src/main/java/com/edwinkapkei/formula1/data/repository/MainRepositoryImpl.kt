@@ -1,12 +1,11 @@
 package com.edwinkapkei.formula1.data.repository
 
-import com.edwinkapkei.formula1.data.model.driverStandings.DriverStandingsResponse
-import com.edwinkapkei.formula1.data.model.drivers.DriversResponse
+import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
+import com.edwinkapkei.formula1.data.model.driver.DriversResponse
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.data.repository.dataSource.F1RemoteDataSource
 import com.edwinkapkei.formula1.data.util.RequestState
 import com.edwinkapkei.formula1.domain.repository.MainRepository
-import retrofit2.Response
 
 class MainRepositoryImpl(
     private val f1RemoteDataSource: F1RemoteDataSource
@@ -36,8 +35,8 @@ class MainRepositoryImpl(
         return RequestState.Error(response.message())
     }
 
-    override suspend fun getCurrentDriverStandings(): RequestState<DriverStandingsResponse> {
-        val response = f1RemoteDataSource.getCurrentDriverStandings()
+    override suspend fun getCurrentConstructors(): RequestState<ConstructorsResponse> {
+        val response = f1RemoteDataSource.getCurrentConstructors()
 
         if (response.isSuccessful) {
             response.body()?.let { result ->
