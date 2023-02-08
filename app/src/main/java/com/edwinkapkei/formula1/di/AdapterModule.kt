@@ -1,5 +1,6 @@
 package com.edwinkapkei.formula1.di
 
+import com.edwinkapkei.formula1.views.constructors.adapter.ConstructorsAdapter
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import com.edwinkapkei.formula1.views.schedule.adapter.ScheduleAdapter
 import dagger.Module
@@ -23,5 +24,11 @@ class AdapterModule {
     @Singleton
     fun provideDriversAdapter(): DriversAdapter {
         return DriversAdapter()
+    }
+
+    @Provides
+    @Singleton
+    fun provideConstructorAdapter(): ConstructorsAdapter {
+        return ConstructorsAdapter()
     }
 }

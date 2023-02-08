@@ -104,4 +104,17 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun hideProgressbar() {
         binding.swipeRefreshLayout.isRefreshing = false
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        Timber.e("onDetach")
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.e("onDestroyView")
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.e("onDestroy")
+    }
 }

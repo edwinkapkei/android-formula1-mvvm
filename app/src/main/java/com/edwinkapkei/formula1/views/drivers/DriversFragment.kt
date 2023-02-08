@@ -17,6 +17,7 @@ import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -34,7 +35,7 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Timber.e("onCreate")
         initViewModel()
     }
 
@@ -110,5 +111,18 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun hideProgressbar() {
         binding.swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Timber.e("onDetach")
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.e("onDestroyView")
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.e("onDestroy")
     }
 }
