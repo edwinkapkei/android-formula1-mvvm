@@ -5,10 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
+import com.edwinkapkei.formula1.data.util.RequestState
+import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
+import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
+import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
+import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
+import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModelFactory
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
-class DriversFragment : Fragment() {
+@AndroidEntryPoint
+class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+    @Inject
+    lateinit var currentDriversViewModelFactory: CurrentDriversViewModelFactory
+
+    @Inject
+    lateinit var driversAdapter: DriversAdapter
+
+    private lateinit var currentDriversViewModel: CurrentDriversViewModel
+    private lateinit var binding: FragmentDriversBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,4 +46,69 @@ class DriversFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_drivers, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentDriversBinding.bind(view)
+
+        initRecyclerView()
+        viewDriversList()
+    }
+
+    private fun initViewModel() {
+        currentDriversViewModel = ViewModelProvider(
+            this,
+            currentDriversViewModelFactory
+        )[CurrentDriversViewModel::class.java]
+        currentDriversViewModel.getCurrentDrivers()
+    }
+
+    private fun initRecyclerView() {
+        binding.swipeRefreshLayout.setOnRefreshListener(this)
+        binding.driversRecycler.adapter = driversAdapter
+        binding.driversRecycler.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+    }
+
+    private fun viewDriversList() {
+        currentDriversViewModel.currentDrivers.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is RequestState.Success -> {
+                    hideProgressbar()
+                    response.data?.let {
+                        driversAdapter.differ.submitList(it.mRData.standingsTable.standingsLists[0].driverStandings)
+                    }
+                }
+                is RequestState.Error -> {
+                    hideProgressbar()
+                    if (response.message != null)
+                        Snackbar.make(binding.root, response.message, Snackbar.LENGTH_SHORT).show()
+                    else
+                        Snackbar.make(
+                            binding.root,
+                            "We could not complete your request. Please try again",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                }
+                is RequestState.Loading -> {
+                    showProgressbar()
+                }
+            }
+        }
+    }
+
+    override fun onRefresh() {
+        currentDriversViewModel.getCurrentDrivers()
+    }
+
+    private fun showProgressbar() {
+        binding.swipeRefreshLayout.isRefreshing = true
+    }
+
+    private fun hideProgressbar() {
+        binding.swipeRefreshLayout.isRefreshing = false
+    }
 }

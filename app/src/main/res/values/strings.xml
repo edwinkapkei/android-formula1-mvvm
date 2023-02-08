@@ -5,4 +5,5 @@
     <string name="schedule">Schedule</string>
     <string name="drivers">Drivers</string>
     <string name="standings">Standings</string>
+    <string name="points">%s Points</string>
 </resources>
