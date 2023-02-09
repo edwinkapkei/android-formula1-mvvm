@@ -6,10 +6,10 @@
         android:title="@string/schedule" />
     <item
         android:id="@+id/driversFragment"
-        android:icon="@drawable/steering"
+        android:icon="@drawable/racing_helmet"
         android:title="@string/drivers" />
     <item
         android:id="@+id/constructorsFragment"
-        android:icon="@drawable/podium"
+        android:icon="@drawable/account_group"
         android:title="@string/standings" />
 </menu>
