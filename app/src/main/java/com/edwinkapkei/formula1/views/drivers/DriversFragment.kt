@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.data.util.RequestState
+import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
-import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModelFactory

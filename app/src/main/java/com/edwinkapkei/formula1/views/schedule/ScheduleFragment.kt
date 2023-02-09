@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.data.util.RequestState
+import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
-import com.edwinkapkei.formula1.views.MainActivity
 import com.edwinkapkei.formula1.views.schedule.adapter.ScheduleAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModelFactory

@@ -1,4 +1,4 @@
-package com.edwinkapkei.formula1.data.util
+package com.edwinkapkei.formula1.utilities
 
 sealed class RequestState<T>(
     val data: T? = null,
