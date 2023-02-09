@@ -27,6 +27,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var currentScheduleViewModelFactory: CurrentScheduleViewModelFactory
+
     @Inject
     lateinit var scheduleAdapter: ScheduleAdapter
 
@@ -38,6 +39,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         initViewModel()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,11 +63,12 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initRecyclerView() {
-        //binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(context, R.color.purple_500))
+        binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.purple_500))
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.scheduleRecycler.adapter = scheduleAdapter
         binding.scheduleRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
+
     private fun viewScheduleList() {
         currentScheduleViewModel.currentSchedule.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -109,10 +112,12 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDetach()
         Timber.e("onDetach")
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Timber.e("onDestroyView")
     }
+
     override fun onDestroy() {
         super.onDestroy()
         Timber.e("onDestroy")
