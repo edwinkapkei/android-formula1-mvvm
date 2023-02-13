@@ -83,6 +83,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
                 }
                 is RequestState.Exception -> {
+                    hideProgressbar()
                     Snackbar.make(
                         binding.root,
                         response.e.message.toString(),
