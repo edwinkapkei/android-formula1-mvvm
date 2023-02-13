@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
+import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.constructors.adapter.ConstructorsAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentConstructorsViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentConstructorsViewModelFactory
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener  {
+class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     @Inject
@@ -79,20 +80,18 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener  {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    response.data?.let {
-                        constructorsAdapter.differ.submitList(it.mRData.standingsTable.standingsLists[0].constructorStandings)
-                    }
+                    constructorsAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].constructorStandings)
                 }
                 is RequestState.Error -> {
                     hideProgressbar()
-                    if (response.message != null)
-                        Snackbar.make(binding.root, response.message, Snackbar.LENGTH_SHORT).show()
-                    else
-                        Snackbar.make(
-                            binding.root,
-                            "We could not complete your request. Please try again",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                    ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
+                }
+                is RequestState.Exception -> {
+                    Snackbar.make(
+                        binding.root,
+                        response.e.message.toString(),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
                 is RequestState.Loading -> {
                     showProgressbar()

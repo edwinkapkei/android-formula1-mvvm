@@ -24,10 +24,10 @@ class CurrentConstructorsViewModel(
                 val apiResult = getCurrentConstructorsUseCase.execute()
                 currentConstructors.postValue(apiResult)
             } else {
-                currentConstructors.postValue(RequestState.Error("Internet is not available"))
+                currentConstructors.postValue(RequestState.Error(0,"Internet is not available"))
             }
         } catch (e: Exception) {
-            currentConstructors.postValue(RequestState.Error(e.message.toString()))
+            currentConstructors.postValue(RequestState.Exception(e))
         }
     }
 }

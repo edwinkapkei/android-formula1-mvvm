@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
+import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModelFactory
@@ -80,20 +81,18 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    response.data?.let {
-                        driversAdapter.differ.submitList(it.mRData.standingsTable.standingsLists[0].driverStandings)
-                    }
+                    driversAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].driverStandings)
                 }
                 is RequestState.Error -> {
                     hideProgressbar()
-                    if (response.message != null)
-                        Snackbar.make(binding.root, response.message, Snackbar.LENGTH_SHORT).show()
-                    else
-                        Snackbar.make(
-                            binding.root,
-                            "We could not complete your request. Please try again",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                    ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
+                }
+                is RequestState.Exception -> {
+                    Snackbar.make(
+                        binding.root,
+                        response.e.message.toString(),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
                 is RequestState.Loading -> {
                     showProgressbar()
@@ -118,10 +117,12 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDetach()
         Timber.e("onDetach")
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Timber.e("onDestroyView")
     }
+
     override fun onDestroy() {
         super.onDestroy()
         Timber.e("onDestroy")

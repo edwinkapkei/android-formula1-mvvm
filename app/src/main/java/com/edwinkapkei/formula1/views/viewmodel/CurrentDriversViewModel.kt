@@ -23,11 +23,11 @@ class CurrentDriversViewModel(
             if (isNetworkAvailable(application)) {
                 val apiResult = getCurrentDriversUseCase.execute()
                 currentDrivers.postValue(apiResult)
-            }else{
-                currentDrivers.postValue(RequestState.Error("Internet is not available"))
+            } else {
+                currentDrivers.postValue(RequestState.Error(0, "Internet is not available"))
             }
         } catch (e: Exception) {
-            currentDrivers.postValue(RequestState.Error(e.message.toString()))
+            currentDrivers.postValue(RequestState.Exception(e))
         }
     }
 

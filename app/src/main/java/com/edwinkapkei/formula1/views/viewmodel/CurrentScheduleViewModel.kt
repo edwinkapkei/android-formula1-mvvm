@@ -24,10 +24,10 @@ class CurrentScheduleViewModel(
                 val apiResult = getCurrentScheduleUseCase.execute(year)
                 currentSchedule.postValue(apiResult)
             } else {
-                currentSchedule.postValue(RequestState.Error("Internet is not available"))
+                currentSchedule.postValue(RequestState.Error(0, "Internet is not available"))
             }
         } catch (e: Exception) {
-            currentSchedule.postValue(RequestState.Error(e.message.toString()))
+            currentSchedule.postValue(RequestState.Exception(e))
         }
     }
 }

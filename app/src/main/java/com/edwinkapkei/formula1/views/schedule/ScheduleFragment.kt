@@ -12,12 +12,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
+import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.schedule.adapter.ScheduleAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModel
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -76,20 +76,18 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    response.data?.let {
-                        scheduleAdapter.differ.submitList(it.mRData.raceTable.races.toList())
-                    }
+                    scheduleAdapter.differ.submitList(response.data.mRData.raceTable.races.toList())
                 }
                 is RequestState.Error -> {
                     hideProgressbar()
-                    if (response.message != null)
-                        Snackbar.make(binding.root, response.message, Snackbar.LENGTH_SHORT).show()
-                    else
-                        Snackbar.make(
-                            binding.root,
-                            "We could not complete your request. Please try again",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                    ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
+                }
+                is RequestState.Exception -> {
+                    Snackbar.make(
+                        binding.root,
+                        response.e.message.toString(),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
                 is RequestState.Loading -> {
                     showProgressbar()
@@ -116,4 +114,5 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             .withZone(ZoneOffset.UTC)
             .format(Instant.now())
     }
+
 }
