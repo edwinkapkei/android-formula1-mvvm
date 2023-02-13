@@ -6,7 +6,7 @@ import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import retrofit2.Response
 
 interface F1RemoteDataSource {
-    suspend fun getCurrentSchedule(): Response<ScheduleResponse>
+    suspend fun getCurrentSchedule(year: String): Response<ScheduleResponse>
 
     suspend fun getCurrentDrivers(): Response<DriversResponse>
 

@@ -11,8 +11,8 @@ class F1RemoteDataSourceImpl(
     private val f1APIService: F1APIService
 ) : F1RemoteDataSource {
 
-    override suspend fun getCurrentSchedule(): Response<ScheduleResponse> {
-        return f1APIService.getCurrentSchedule()
+    override suspend fun getCurrentSchedule(year: String): Response<ScheduleResponse> {
+        return f1APIService.getCurrentSchedule(year)
     }
 
     override suspend fun getCurrentDrivers(): Response<DriversResponse> {

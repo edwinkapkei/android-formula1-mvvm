@@ -17,11 +17,11 @@ class CurrentScheduleViewModel(
 ) : AndroidViewModel(application) {
     val currentSchedule: MutableLiveData<RequestState<ScheduleResponse>> = MutableLiveData()
 
-    fun getCurrentSchedule() = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrentSchedule(year: String) = viewModelScope.launch(Dispatchers.IO) {
         currentSchedule.postValue(RequestState.Loading())
         try {
             if (isNetworkAvailable(application)) {
-                val apiResult = getCurrentScheduleUseCase.execute()
+                val apiResult = getCurrentScheduleUseCase.execute(year)
                 currentSchedule.postValue(apiResult)
             } else {
                 currentSchedule.postValue(RequestState.Error("Internet is not available"))

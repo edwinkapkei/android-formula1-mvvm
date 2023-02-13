@@ -11,8 +11,8 @@ class MainRepositoryImpl(
     private val f1RemoteDataSource: F1RemoteDataSource
 ) : MainRepository {
 
-    override suspend fun getCurrentSchedule(): RequestState<ScheduleResponse> {
-        val response = f1RemoteDataSource.getCurrentSchedule()
+    override suspend fun getCurrentSchedule(year: String): RequestState<ScheduleResponse> {
+        val response = f1RemoteDataSource.getCurrentSchedule(year)
 
         if (response.isSuccessful) {
             response.body()?.let { result ->

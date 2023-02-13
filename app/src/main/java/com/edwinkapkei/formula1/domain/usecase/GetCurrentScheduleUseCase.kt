@@ -6,7 +6,7 @@ import com.edwinkapkei.formula1.domain.repository.MainRepository
 
 class GetCurrentScheduleUseCase(private val mainRepository: MainRepository) {
 
-    suspend fun execute(): RequestState<ScheduleResponse> {
-        return mainRepository.getCurrentSchedule()
+    suspend fun execute(year: String): RequestState<ScheduleResponse> {
+        return mainRepository.getCurrentSchedule(year)
     }
 }

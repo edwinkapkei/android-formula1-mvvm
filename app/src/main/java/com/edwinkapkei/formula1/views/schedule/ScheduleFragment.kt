@@ -18,6 +18,9 @@ import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 
@@ -58,7 +61,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun initViewModel() {
         currentScheduleViewModel =
             ViewModelProvider(this, currentScheduleViewModelFactory)[CurrentScheduleViewModel::class.java]
-        currentScheduleViewModel.getCurrentSchedule()
+        currentScheduleViewModel.getCurrentSchedule(getCurrentYear())
     }
 
     private fun initRecyclerView() {
@@ -96,7 +99,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        currentScheduleViewModel.getCurrentSchedule()
+        currentScheduleViewModel.getCurrentSchedule(getCurrentYear())
     }
 
     private fun showProgressbar() {
@@ -107,18 +110,10 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Timber.e("onDetach")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Timber.e("onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.e("onDestroy")
+    private fun getCurrentYear(): String {
+        return DateTimeFormatter
+            .ofPattern("yyyy")
+            .withZone(ZoneOffset.UTC)
+            .format(Instant.now())
     }
 }
