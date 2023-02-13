@@ -10,6 +10,7 @@ import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriversUseCase
 import com.edwinkapkei.formula1.utilities.NetworkCheck.isNetworkAvailable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.Year
 
 class CurrentDriversViewModel(
     private val application: Application,
@@ -17,11 +18,11 @@ class CurrentDriversViewModel(
 ) : AndroidViewModel(application) {
     val currentDrivers: MutableLiveData<RequestState<List<DriverAndImage>>> = MutableLiveData()
 
-    fun getCurrentDrivers() = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrentDrivers(year: String) = viewModelScope.launch(Dispatchers.IO) {
         currentDrivers.postValue(RequestState.Loading())
         try {
             if (isNetworkAvailable(application)) {
-                val apiResult = getCurrentDriversUseCase.execute()
+                val apiResult = getCurrentDriversUseCase.execute(year)
                 currentDrivers.postValue(apiResult)
             } else {
                 currentDrivers.postValue(RequestState.Error(0, "Internet is not available"))

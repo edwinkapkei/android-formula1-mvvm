@@ -8,7 +8,7 @@ import retrofit2.Response
 interface F1RemoteDataSource {
     suspend fun getCurrentSchedule(year: String): Response<ScheduleResponse>
 
-    suspend fun getCurrentDrivers(): Response<DriversResponse>
+    suspend fun getCurrentDrivers(year: String): Response<DriversResponse>
 
-    suspend fun getCurrentConstructors(): Response<ConstructorsResponse>
+    suspend fun getCurrentConstructors(year: String): Response<ConstructorsResponse>
 }

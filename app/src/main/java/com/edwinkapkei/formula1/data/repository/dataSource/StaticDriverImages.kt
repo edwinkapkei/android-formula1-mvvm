@@ -1,6 +1,6 @@
 package com.edwinkapkei.formula1.data.repository.dataSource
 
-object DriverImages {
+object StaticDriverImages {
 
     fun getDriverImages(): Map<String, String> {
         return mapOf(

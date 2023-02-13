@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
+import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.schedule.adapter.ScheduleAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModel
@@ -107,13 +108,6 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun hideProgressbar() {
         binding.swipeRefreshLayout.isRefreshing = false
-    }
-
-    private fun getCurrentYear(): String {
-        return DateTimeFormatter
-            .ofPattern("yyyy")
-            .withZone(ZoneOffset.UTC)
-            .format(Instant.now())
     }
 
 }

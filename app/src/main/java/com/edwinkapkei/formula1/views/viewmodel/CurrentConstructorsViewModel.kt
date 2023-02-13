@@ -17,14 +17,14 @@ class CurrentConstructorsViewModel(
 ) : AndroidViewModel(application) {
     val currentConstructors: MutableLiveData<RequestState<ConstructorsResponse>> = MutableLiveData()
 
-    fun getCurrentConstructors() = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrentConstructors(year: String) = viewModelScope.launch(Dispatchers.IO) {
         currentConstructors.postValue(RequestState.Loading())
         try {
             if (isNetworkAvailable(application)) {
-                val apiResult = getCurrentConstructorsUseCase.execute()
+                val apiResult = getCurrentConstructorsUseCase.execute(year)
                 currentConstructors.postValue(apiResult)
             } else {
-                currentConstructors.postValue(RequestState.Error(0,"Internet is not available"))
+                currentConstructors.postValue(RequestState.Error(0, "Internet is not available"))
             }
         } catch (e: Exception) {
             currentConstructors.postValue(RequestState.Exception(e))

@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
+import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
@@ -61,7 +62,7 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             this,
             currentDriversViewModelFactory
         )[CurrentDriversViewModel::class.java]
-        currentDriversViewModel.getCurrentDrivers()
+        currentDriversViewModel.getCurrentDrivers(getCurrentYear())
     }
 
     private fun initRecyclerView() {
@@ -103,7 +104,7 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        currentDriversViewModel.getCurrentDrivers()
+        currentDriversViewModel.getCurrentDrivers(getCurrentYear())
     }
 
     private fun showProgressbar() {

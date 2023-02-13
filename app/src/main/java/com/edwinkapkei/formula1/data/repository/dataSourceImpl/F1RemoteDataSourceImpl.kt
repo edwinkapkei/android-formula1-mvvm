@@ -15,11 +15,11 @@ class F1RemoteDataSourceImpl(
         return f1APIService.getCurrentSchedule(year)
     }
 
-    override suspend fun getCurrentDrivers(): Response<DriversResponse> {
-        return f1APIService.getCurrentDrivers()
+    override suspend fun getCurrentDrivers(year: String): Response<DriversResponse> {
+        return f1APIService.getCurrentDrivers(year)
     }
 
-    override suspend fun getCurrentConstructors(): Response<ConstructorsResponse> {
-        return f1APIService.getCurrentConstructors()
+    override suspend fun getCurrentConstructors(year: String): Response<ConstructorsResponse> {
+        return f1APIService.getCurrentConstructors(year)
     }
 }

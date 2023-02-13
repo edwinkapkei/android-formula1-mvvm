@@ -9,9 +9,9 @@ interface MainRepository {
 
     suspend fun getCurrentSchedule(year: String): RequestState<ScheduleResponse>
 
-    suspend fun getCurrentDrivers(): RequestState<DriversResponse>
+    suspend fun getCurrentDrivers(year: String): RequestState<DriversResponse>
 
-    suspend fun getCurrentConstructors(): RequestState<ConstructorsResponse>
+    suspend fun getCurrentConstructors(year: String): RequestState<ConstructorsResponse>
 
     suspend fun getDriverPhotos(): Map<String, String>
 }

@@ -12,9 +12,9 @@ interface F1APIService {
     @GET("api/f1/{YEAR}.json")
     suspend fun getCurrentSchedule(@Path("YEAR") year: String): Response<ScheduleResponse>
 
-    @GET("api/f1/current/driverStandings.json")
-    suspend fun getCurrentDrivers(): Response<DriversResponse>
+    @GET("api/f1/{YEAR}/driverStandings.json")
+    suspend fun getCurrentDrivers(@Path("YEAR") year: String): Response<DriversResponse>
 
-    @GET("api/f1/current/constructorStandings.json")
-    suspend fun getCurrentConstructors(): Response<ConstructorsResponse>
+    @GET("api/f1/{YEAR}/constructorStandings.json")
+    suspend fun getCurrentConstructors(@Path("YEAR") year: String): Response<ConstructorsResponse>
 }

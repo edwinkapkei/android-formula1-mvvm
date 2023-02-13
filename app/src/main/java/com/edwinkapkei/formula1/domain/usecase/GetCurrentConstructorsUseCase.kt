@@ -6,7 +6,7 @@ import com.edwinkapkei.formula1.domain.repository.MainRepository
 
 class GetCurrentConstructorsUseCase(private val mainRepository: MainRepository) {
 
-    suspend fun execute(): RequestState<ConstructorsResponse> {
-        return mainRepository.getCurrentConstructors()
+    suspend fun execute(year: String): RequestState<ConstructorsResponse> {
+        return mainRepository.getCurrentConstructors(year)
     }
 }

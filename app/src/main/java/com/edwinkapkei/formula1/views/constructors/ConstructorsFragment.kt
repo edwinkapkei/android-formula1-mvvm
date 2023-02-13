@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
+import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.constructors.adapter.ConstructorsAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentConstructorsViewModel
@@ -60,7 +61,7 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             this,
             currentConstructorsViewModelFactory
         )[CurrentConstructorsViewModel::class.java]
-        currentConstructorsViewModel.getCurrentConstructors()
+        currentConstructorsViewModel.getCurrentConstructors(getCurrentYear())
     }
 
     private fun initRecyclerView() {
@@ -102,7 +103,7 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        currentConstructorsViewModel.getCurrentConstructors()
+        currentConstructorsViewModel.getCurrentConstructors(getCurrentYear())
     }
 
     private fun showProgressbar() {
