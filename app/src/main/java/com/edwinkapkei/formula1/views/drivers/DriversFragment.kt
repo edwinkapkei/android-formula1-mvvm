@@ -81,7 +81,7 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    driversAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].driverStandings)
+                    driversAdapter.differ.submitList(response.data)
                 }
                 is RequestState.Error -> {
                     hideProgressbar()

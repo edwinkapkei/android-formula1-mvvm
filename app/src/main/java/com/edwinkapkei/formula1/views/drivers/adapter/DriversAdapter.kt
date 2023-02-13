@@ -6,21 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.data.model.driver.DriverStanding
-import com.edwinkapkei.formula1.data.model.schedule.Race
+import com.edwinkapkei.formula1.data.model.driver.DriverAndImage
 import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
-import com.edwinkapkei.formula1.databinding.ListItemScheduleBinding
 import java.util.*
 
 class DriversAdapter : RecyclerView.Adapter<DriversAdapter.DriversViewHolder>() {
-    private val callback = object : DiffUtil.ItemCallback<DriverStanding>() {
-        override fun areContentsTheSame(oldItem: DriverStanding, newItem: DriverStanding): Boolean {
+    private val callback = object : DiffUtil.ItemCallback<DriverAndImage>() {
+        override fun areContentsTheSame(
+            oldItem: DriverAndImage,
+            newItem: DriverAndImage
+        ): Boolean {
             return oldItem == newItem
         }
 
-        override fun areItemsTheSame(oldItem: DriverStanding, newItem: DriverStanding): Boolean {
-            return oldItem.driver.driverId == newItem.driver.driverId
+        override fun areItemsTheSame(
+            oldItem: DriverAndImage,
+            newItem: DriverAndImage
+        ): Boolean {
+            return oldItem.driverStanding.driver.driverId == newItem.driverStanding.driver.driverId
         }
     }
 
@@ -36,10 +41,17 @@ class DriversAdapter : RecyclerView.Adapter<DriversAdapter.DriversViewHolder>() 
     override fun onBindViewHolder(holder: DriversAdapter.DriversViewHolder, position: Int) {
         val driver = differ.currentList[position]
 
-        holder.binding.position.text = driver.position
-        holder.binding.name.text = "${driver.driver.givenName} ${driver.driver.familyName}"
+        holder.binding.position.text = driver.driverStanding.position
+        holder.binding.name.text =
+            "${driver.driverStanding.driver.givenName} ${driver.driverStanding.driver.familyName}"
         holder.binding.points.text =
-            holder.binding.points.context.getString(R.string.points, driver.points)
+            holder.binding.points.context.getString(R.string.points, driver.driverStanding.points)
+
+        Glide
+            .with(holder.binding.root.context)
+            .load(driver.driverImageUrl)
+            .placeholder(R.drawable.racing_helmet_blue)
+            .into(holder.binding.avatar);
     }
 
     override fun getItemCount(): Int {
