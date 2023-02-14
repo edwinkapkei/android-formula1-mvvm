@@ -1,4 +1,4 @@
-As a big fan of Formula1 I decided to build an app with basic information about the sport while utilising the clean architecture principles recommended by Google. The app is written in Kotlin.
+As a big fan of Formula1 I decided to build an app with basic information about the sport while utilising the clean architecture principles recommended by Google. The purpose of this project is to help me get a deeper understanding to to approaches of clean architecture. The app is written in Kotlin.
 
 This app uses the Ergast Motor Racing API (https://ergast.com/) for information on races, drivers and teams. A big thank you to Ergast developers for providing the data.
 
