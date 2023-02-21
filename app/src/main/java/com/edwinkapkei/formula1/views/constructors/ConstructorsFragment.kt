@@ -12,6 +12,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
+import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
+import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.constructors.adapter.ConstructorsAdapter
@@ -32,7 +34,8 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var constructorsAdapter: ConstructorsAdapter
 
     private lateinit var currentConstructorsViewModel: CurrentConstructorsViewModel
-    private lateinit var binding: FragmentConstructorsBinding
+    private var _binding: FragmentConstructorsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +48,12 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_constructors, container, false)
+        _binding = FragmentConstructorsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentConstructorsBinding.bind(view)
 
         initRecyclerView()
         viewDriversList()
@@ -113,4 +116,20 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun hideProgressbar() {
         binding.swipeRefreshLayout.isRefreshing = false
     }
+
+    override fun onPause() {
+        super.onPause()
+        binding.swipeRefreshLayout.isEnabled = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.swipeRefreshLayout.isEnabled = true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

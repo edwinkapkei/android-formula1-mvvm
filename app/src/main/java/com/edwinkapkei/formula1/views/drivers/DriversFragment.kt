@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
+import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
+import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
@@ -33,8 +35,8 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var driversAdapter: DriversAdapter
 
     private lateinit var currentDriversViewModel: CurrentDriversViewModel
-    private lateinit var binding: FragmentDriversBinding
-
+    private var _binding: FragmentDriversBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.e("onCreate")
@@ -46,12 +48,12 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drivers, container, false)
+        _binding = FragmentDriversBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentDriversBinding.bind(view)
 
         initRecyclerView()
         viewDriversList()
@@ -115,18 +117,19 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Timber.e("onDetach")
+    override fun onPause() {
+        super.onPause()
+        binding.swipeRefreshLayout.isEnabled = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.swipeRefreshLayout.isEnabled = true
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Timber.e("onDestroyView")
+        _binding = null
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.e("onDestroy")
-    }
 }

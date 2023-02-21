@@ -35,7 +35,9 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var scheduleAdapter: ScheduleAdapter
 
     private lateinit var currentScheduleViewModel: CurrentScheduleViewModel
-    private lateinit var binding: FragmentScheduleBinding
+
+    private var _binding: FragmentScheduleBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +50,12 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false)
+        _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentScheduleBinding.bind(view)
 
         initRecyclerView()
         viewScheduleList()
@@ -108,6 +110,21 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun hideProgressbar() {
         binding.swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.swipeRefreshLayout.isEnabled = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.swipeRefreshLayout.isEnabled = true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
