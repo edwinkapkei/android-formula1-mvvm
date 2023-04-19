@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -26,14 +27,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-
-    @Inject
-    lateinit var currentConstructorsViewModelFactory: CurrentConstructorsViewModelFactory
-
     @Inject
     lateinit var constructorsAdapter: ConstructorsAdapter
 
-    private lateinit var currentConstructorsViewModel: CurrentConstructorsViewModel
+    private val currentConstructorsViewModel: CurrentConstructorsViewModel by viewModels()
     private var _binding: FragmentConstructorsBinding? = null
     private val binding get() = _binding!!
 
@@ -60,10 +57,6 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initViewModel() {
-        currentConstructorsViewModel = ViewModelProvider(
-            this,
-            currentConstructorsViewModelFactory
-        )[CurrentConstructorsViewModel::class.java]
         currentConstructorsViewModel.getCurrentConstructors(getCurrentYear())
     }
 
@@ -86,10 +79,12 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     hideProgressbar()
                     constructorsAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].constructorStandings)
                 }
+
                 is RequestState.Error -> {
                     hideProgressbar()
                     ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
                 }
+
                 is RequestState.Exception -> {
                     hideProgressbar()
                     Snackbar.make(
@@ -98,6 +93,7 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
+
                 is RequestState.Loading -> {
                     showProgressbar()
                 }

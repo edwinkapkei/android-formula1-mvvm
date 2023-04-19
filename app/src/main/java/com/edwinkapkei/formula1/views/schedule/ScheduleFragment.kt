@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -29,12 +30,9 @@ import javax.inject.Inject
 class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var currentScheduleViewModelFactory: CurrentScheduleViewModelFactory
-
-    @Inject
     lateinit var scheduleAdapter: ScheduleAdapter
 
-    private lateinit var currentScheduleViewModel: CurrentScheduleViewModel
+    private val currentScheduleViewModel: CurrentScheduleViewModel by viewModels()
 
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
@@ -62,8 +60,6 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initViewModel() {
-        currentScheduleViewModel =
-            ViewModelProvider(this, currentScheduleViewModelFactory)[CurrentScheduleViewModel::class.java]
         currentScheduleViewModel.getCurrentSchedule(getCurrentYear())
     }
 
@@ -81,10 +77,12 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     hideProgressbar()
                     scheduleAdapter.differ.submitList(response.data.mRData.raceTable.races.toList())
                 }
+
                 is RequestState.Error -> {
                     hideProgressbar()
                     ErrorProcessing.processHttpErrorCodes(code = response.code, view = binding.root)
                 }
+
                 is RequestState.Exception -> {
                     hideProgressbar()
                     Snackbar.make(
@@ -93,6 +91,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
+
                 is RequestState.Loading -> {
                     showProgressbar()
                 }

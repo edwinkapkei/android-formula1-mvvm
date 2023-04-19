@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -29,12 +30,9 @@ import javax.inject.Inject
 class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var currentDriversViewModelFactory: CurrentDriversViewModelFactory
-
-    @Inject
     lateinit var driversAdapter: DriversAdapter
 
-    private lateinit var currentDriversViewModel: CurrentDriversViewModel
+    private val currentDriversViewModel: CurrentDriversViewModel by viewModels()
     private var _binding: FragmentDriversBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,10 +58,6 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initViewModel() {
-        currentDriversViewModel = ViewModelProvider(
-            this,
-            currentDriversViewModelFactory
-        )[CurrentDriversViewModel::class.java]
         currentDriversViewModel.getCurrentDrivers(getCurrentYear())
     }
 

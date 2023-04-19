@@ -1,20 +1,23 @@
 package com.edwinkapkei.formula1.views.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentConstructorsUseCase
 import com.edwinkapkei.formula1.utilities.NetworkCheck.isNetworkAvailable
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CurrentConstructorsViewModel(
+@HiltViewModel
+class CurrentConstructorsViewModel @Inject constructor(
     private val application: Application,
     private val getCurrentConstructorsUseCase: GetCurrentConstructorsUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
     val currentConstructors: MutableLiveData<RequestState<ConstructorsResponse>> = MutableLiveData()
 
     fun getCurrentConstructors(year: String) = viewModelScope.launch(Dispatchers.IO) {

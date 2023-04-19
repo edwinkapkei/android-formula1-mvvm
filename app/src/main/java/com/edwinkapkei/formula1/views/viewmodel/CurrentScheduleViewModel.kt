@@ -1,20 +1,23 @@
 package com.edwinkapkei.formula1.views.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentScheduleUseCase
 import com.edwinkapkei.formula1.utilities.NetworkCheck.isNetworkAvailable
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CurrentScheduleViewModel(
+@HiltViewModel
+class CurrentScheduleViewModel @Inject constructor(
     private val application: Application,
     private val getCurrentScheduleUseCase: GetCurrentScheduleUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
     val currentSchedule: MutableLiveData<RequestState<ScheduleResponse>> = MutableLiveData()
 
     fun getCurrentSchedule(year: String) = viewModelScope.launch(Dispatchers.IO) {
