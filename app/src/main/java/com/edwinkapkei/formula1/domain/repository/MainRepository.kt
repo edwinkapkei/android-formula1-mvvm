@@ -14,4 +14,6 @@ interface MainRepository {
     suspend fun getCurrentConstructors(year: String): RequestState<ConstructorsResponse>
 
     suspend fun getDriverPhotos(): Map<String, String>
+
+    suspend fun getTeamCarPhotos(year: String): Map<String, String>
 }

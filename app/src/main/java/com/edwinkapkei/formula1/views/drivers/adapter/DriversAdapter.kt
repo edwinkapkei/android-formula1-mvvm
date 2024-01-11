@@ -51,7 +51,7 @@ class DriversAdapter : RecyclerView.Adapter<DriversAdapter.DriversViewHolder>() 
             .with(holder.binding.root.context)
             .load(driver.driverImageUrl)
             .placeholder(R.drawable.racing_helmet_blue)
-            .into(holder.binding.avatar);
+            .into(holder.binding.avatar)
     }
 
     override fun getItemCount(): Int {

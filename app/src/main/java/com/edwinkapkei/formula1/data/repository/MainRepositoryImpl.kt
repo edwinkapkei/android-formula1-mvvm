@@ -3,10 +3,11 @@ package com.edwinkapkei.formula1.data.repository
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
 import com.edwinkapkei.formula1.data.model.driver.DriversResponse
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
-import com.edwinkapkei.formula1.data.repository.dataSource.StaticDriverImages
 import com.edwinkapkei.formula1.data.repository.dataSource.F1RemoteDataSource
-import com.edwinkapkei.formula1.utilities.RequestState
+import com.edwinkapkei.formula1.data.repository.dataSource.StaticDriverImages
+import com.edwinkapkei.formula1.data.repository.dataSource.StaticTeamCarImages
 import com.edwinkapkei.formula1.domain.repository.MainRepository
+import com.edwinkapkei.formula1.utilities.RequestState
 import retrofit2.HttpException
 
 class MainRepositoryImpl(
@@ -66,5 +67,9 @@ class MainRepositoryImpl(
 
     override suspend fun getDriverPhotos(): Map<String, String> {
         return StaticDriverImages.getDriverImages()
+    }
+
+    override suspend fun getTeamCarPhotos(year: String): Map<String, String> {
+        return StaticTeamCarImages.getTeamCarImages(year)
     }
 }

@@ -6,30 +6,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.data.model.constructor.ConstructorStanding
-import com.edwinkapkei.formula1.data.model.driver.DriverStanding
-import com.edwinkapkei.formula1.data.model.schedule.Race
+import com.edwinkapkei.formula1.data.model.constructor.ConstructorAndTeamCarImage
 import com.edwinkapkei.formula1.databinding.ListItemConstructorBinding
-import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
-import com.edwinkapkei.formula1.databinding.ListItemScheduleBinding
-import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import java.util.*
 
 class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.ConstructorsViewHolder>() {
-    private val callback = object : DiffUtil.ItemCallback<ConstructorStanding>() {
+    private val callback = object : DiffUtil.ItemCallback<ConstructorAndTeamCarImage>() {
         override fun areContentsTheSame(
-            oldItem: ConstructorStanding,
-            newItem: ConstructorStanding
+            oldItem: ConstructorAndTeamCarImage,
+            newItem: ConstructorAndTeamCarImage
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areItemsTheSame(
-            oldItem: ConstructorStanding,
-            newItem: ConstructorStanding
+            oldItem: ConstructorAndTeamCarImage,
+            newItem: ConstructorAndTeamCarImage
         ): Boolean {
-            return oldItem.constructor.constructorId == newItem.constructor.constructorId
+            return oldItem.constructorStanding.constructor.constructorId == newItem
+                .constructorStanding.constructor.constructorId
         }
     }
 
@@ -51,10 +48,16 @@ class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.Constructor
     ) {
         val constructor = differ.currentList[position]
 
-        holder.binding.position.text = constructor.position
-        holder.binding.name.text = constructor.constructor.name
+        holder.binding.position.text = constructor.constructorStanding.position
+        holder.binding.name.text = constructor.constructorStanding.constructor.name
         holder.binding.points.text =
-            holder.binding.points.context.getString(R.string.points, constructor.points)
+            holder.binding.points.context.getString(R.string.points, constructor.constructorStanding.points)
+
+        Glide
+            .with(holder.binding.root.context)
+            .load(constructor.teamCarImageUrl)
+            .placeholder(R.drawable.steering_blue)
+            .into(holder.binding.avatar)
     }
 
     override fun getItemCount(): Int {

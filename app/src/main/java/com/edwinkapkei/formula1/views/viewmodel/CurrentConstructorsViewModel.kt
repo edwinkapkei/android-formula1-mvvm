@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.edwinkapkei.formula1.data.model.constructor.ConstructorAndTeamCarImage
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
 import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentConstructorsUseCase
@@ -18,7 +19,7 @@ class CurrentConstructorsViewModel @Inject constructor(
     private val application: Application,
     private val getCurrentConstructorsUseCase: GetCurrentConstructorsUseCase
 ) : ViewModel() {
-    val currentConstructors: MutableLiveData<RequestState<ConstructorsResponse>> = MutableLiveData()
+    val currentConstructors: MutableLiveData<RequestState<List<ConstructorAndTeamCarImage>>> = MutableLiveData()
 
     fun getCurrentConstructors(year: String) = viewModelScope.launch(Dispatchers.IO) {
         currentConstructors.postValue(RequestState.Loading())

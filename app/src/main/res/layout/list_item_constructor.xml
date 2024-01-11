@@ -37,7 +37,7 @@
         android:hint="Charles Leclerc"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintBottom_toTopOf="@id/points"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/avatar"
         app:layout_constraintStart_toStartOf="@id/barrier"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,8 +50,17 @@
         android:hint="335 Points"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/avatar"
         app:layout_constraintStart_toStartOf="@id/barrier"
         app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/steering_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

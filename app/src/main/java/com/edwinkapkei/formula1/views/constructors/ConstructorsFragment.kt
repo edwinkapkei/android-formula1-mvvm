@@ -73,10 +73,7 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    val standingsList = response.data.mRData.standingsTable.standingsLists
-                    if (standingsList.isNotEmpty()) {
-                        constructorsAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].constructorStandings)
-                    }
+                    constructorsAdapter.differ.submitList(response.data)
                 }
 
                 is RequestState.Error -> {
