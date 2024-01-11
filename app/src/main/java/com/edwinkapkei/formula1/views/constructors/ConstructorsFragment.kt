@@ -1,25 +1,21 @@
 package com.edwinkapkei.formula1.views.constructors
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
-import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
-import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
+import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.views.constructors.adapter.ConstructorsAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentConstructorsViewModel
-import com.edwinkapkei.formula1.views.viewmodel.CurrentConstructorsViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -77,7 +73,10 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             when (response) {
                 is RequestState.Success -> {
                     hideProgressbar()
-                    constructorsAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].constructorStandings)
+                    val standingsList = response.data.mRData.standingsTable.standingsLists
+                    if (standingsList.isNotEmpty()) {
+                        constructorsAdapter.differ.submitList(response.data.mRData.standingsTable.standingsLists[0].constructorStandings)
+                    }
                 }
 
                 is RequestState.Error -> {
