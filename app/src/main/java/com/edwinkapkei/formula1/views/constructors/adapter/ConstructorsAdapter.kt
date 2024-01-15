@@ -46,7 +46,7 @@ class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.Constructor
         holder: ConstructorsAdapter.ConstructorsViewHolder,
         position: Int
     ) {
-        val constructor = differ.currentList[position]
+        val constructor = differ.currentList[position] 
 
         holder.binding.position.text = constructor.constructorStanding.position
         holder.binding.name.text = constructor.constructorStanding.constructor.name
