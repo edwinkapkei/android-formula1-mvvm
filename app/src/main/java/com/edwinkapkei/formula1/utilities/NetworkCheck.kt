@@ -6,7 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 
 object NetworkCheck {
-    //TODO: inject??
+    // TODO: inject??
     fun isNetworkAvailable(context: Context?): Boolean {
         if (context == null) return false
         val connectivityManager =

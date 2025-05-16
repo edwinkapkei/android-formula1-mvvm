@@ -12,10 +12,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class RemoteDataSourceModule {
-
     @Singleton
     @Provides
-    fun provideF1RemoteDataSource(f1APIService: F1APIService):F1RemoteDataSource{
+    fun provideF1RemoteDataSource(f1APIService: F1APIService): F1RemoteDataSource {
         return F1RemoteDataSourceImpl(f1APIService)
     }
 }

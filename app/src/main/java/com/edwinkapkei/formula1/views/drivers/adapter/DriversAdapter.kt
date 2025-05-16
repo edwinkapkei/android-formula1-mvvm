@@ -13,32 +13,39 @@ import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
 import java.util.*
 
 class DriversAdapter : RecyclerView.Adapter<DriversAdapter.DriversViewHolder>() {
-    private val callback = object : DiffUtil.ItemCallback<DriverAndImage>() {
-        override fun areContentsTheSame(
-            oldItem: DriverAndImage,
-            newItem: DriverAndImage
-        ): Boolean {
-            return oldItem == newItem
-        }
+    private val callback =
+        object : DiffUtil.ItemCallback<DriverAndImage>() {
+            override fun areContentsTheSame(
+                oldItem: DriverAndImage,
+                newItem: DriverAndImage,
+            ): Boolean {
+                return oldItem == newItem
+            }
 
-        override fun areItemsTheSame(
-            oldItem: DriverAndImage,
-            newItem: DriverAndImage
-        ): Boolean {
-            return oldItem.driverStanding.driver.driverId == newItem.driverStanding.driver.driverId
+            override fun areItemsTheSame(
+                oldItem: DriverAndImage,
+                newItem: DriverAndImage,
+            ): Boolean {
+                return oldItem.driverStanding.driver.driverId == newItem.driverStanding.driver.driverId
+            }
         }
-    }
 
     val differ = AsyncListDiffer(this, callback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DriversViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): DriversViewHolder {
         val binding =
             ListItemDriverBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DriversViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: DriversAdapter.DriversViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: DriversAdapter.DriversViewHolder,
+        position: Int,
+    ) {
         val driver = differ.currentList[position]
 
         holder.binding.position.text = driver.driverStanding.position

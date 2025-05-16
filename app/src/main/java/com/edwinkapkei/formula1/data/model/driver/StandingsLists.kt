@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.driver
 
-
 import com.google.gson.annotations.SerializedName
 
 data class StandingsLists(
@@ -9,5 +8,5 @@ data class StandingsLists(
     @SerializedName("round")
     val round: String,
     @SerializedName("season")
-    val season: String
+    val season: String,
 )

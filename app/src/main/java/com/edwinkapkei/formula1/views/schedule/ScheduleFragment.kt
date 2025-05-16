@@ -7,28 +7,21 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
+import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.views.schedule.adapter.ScheduleAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModel
-import com.edwinkapkei.formula1.views.viewmodel.CurrentScheduleViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.Instant
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
-
     @Inject
     lateinit var scheduleAdapter: ScheduleAdapter
 
@@ -44,15 +37,19 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
@@ -88,7 +85,7 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     Snackbar.make(
                         binding.root,
                         response.e.message.toString(),
-                        Snackbar.LENGTH_SHORT
+                        Snackbar.LENGTH_SHORT,
                     ).show()
                 }
 
@@ -125,5 +122,4 @@ class ScheduleFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Circuit(
@@ -11,5 +10,5 @@ data class Circuit(
     @SerializedName("Location")
     val location: Location,
     @SerializedName("url")
-    val url: String
+    val url: String,
 )

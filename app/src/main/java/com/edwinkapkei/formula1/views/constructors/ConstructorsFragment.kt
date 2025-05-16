@@ -22,7 +22,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
-
     @Inject
     lateinit var constructorsAdapter: ConstructorsAdapter
 
@@ -37,15 +36,19 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentConstructorsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
@@ -63,8 +66,8 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.constructorsRecycler.addItemDecoration(
             DividerItemDecoration(
                 context,
-                DividerItemDecoration.VERTICAL
-            )
+                DividerItemDecoration.VERTICAL,
+            ),
         )
     }
 
@@ -86,7 +89,7 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     Snackbar.make(
                         binding.root,
                         response.e.message.toString(),
-                        Snackbar.LENGTH_SHORT
+                        Snackbar.LENGTH_SHORT,
                     ).show()
                 }
 
@@ -123,5 +126,4 @@ class ConstructorsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDestroyView()
         _binding = null
     }
-
 }

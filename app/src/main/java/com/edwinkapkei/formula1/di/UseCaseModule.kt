@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class UseCaseModule {
-
     @Singleton
     @Provides
     fun provideCurrentScheduleUseCase(mainRepository: MainRepository): GetCurrentScheduleUseCase {
@@ -26,7 +25,7 @@ class UseCaseModule {
     @Provides
     fun provideCurrentDriversUseCase(
         mainRepository: MainRepository,
-        driverPhotosUseCase: GetCurrentDriverPhotosUseCase
+        driverPhotosUseCase: GetCurrentDriverPhotosUseCase,
     ): GetCurrentDriversUseCase {
         return GetCurrentDriversUseCase(mainRepository, driverPhotosUseCase)
     }
@@ -35,7 +34,7 @@ class UseCaseModule {
     @Provides
     fun provideCurrentConstructorsUseCase(
         mainRepository: MainRepository,
-        teamCarPhotosUseCase: GetCurrentTeamCarPhotosUseCase
+        teamCarPhotosUseCase: GetCurrentTeamCarPhotosUseCase,
     ): GetCurrentConstructorsUseCase {
         return GetCurrentConstructorsUseCase(mainRepository, teamCarPhotosUseCase)
     }

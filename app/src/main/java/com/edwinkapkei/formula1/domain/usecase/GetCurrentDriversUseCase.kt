@@ -7,7 +7,7 @@ import com.edwinkapkei.formula1.utilities.RequestState
 
 class GetCurrentDriversUseCase(
     private val mainRepository: MainRepository,
-    private val driverPhotosUseCase: GetCurrentDriverPhotosUseCase
+    private val driverPhotosUseCase: GetCurrentDriverPhotosUseCase,
 ) {
     suspend fun execute(year: String): RequestState<List<DriverAndImage>> {
         val driversResponse = mainRepository.getCurrentDrivers(year)

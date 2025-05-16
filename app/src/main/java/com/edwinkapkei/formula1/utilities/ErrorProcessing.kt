@@ -4,8 +4,11 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 
 object ErrorProcessing {
-
-    fun processHttpErrorCodes(code: Int, message: String? = null, view: View) {
+    fun processHttpErrorCodes(
+        code: Int,
+        message: String? = null,
+        view: View,
+    ) {
         val errorMessage: String
         when (code) {
             0 -> {
@@ -31,7 +34,7 @@ object ErrorProcessing {
         Snackbar.make(
             view,
             errorMessage,
-            Snackbar.LENGTH_SHORT
+            Snackbar.LENGTH_SHORT,
         ).show()
     }
 }

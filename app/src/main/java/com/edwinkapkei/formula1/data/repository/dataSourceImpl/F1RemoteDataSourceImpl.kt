@@ -8,9 +8,8 @@ import com.edwinkapkei.formula1.data.repository.dataSource.F1RemoteDataSource
 import retrofit2.Response
 
 class F1RemoteDataSourceImpl(
-    private val f1APIService: F1APIService
+    private val f1APIService: F1APIService,
 ) : F1RemoteDataSource {
-
     override suspend fun getCurrentSchedule(year: String): Response<ScheduleResponse> {
         return f1APIService.getCurrentSchedule(year)
     }

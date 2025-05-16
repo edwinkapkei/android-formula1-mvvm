@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Location(
@@ -11,5 +10,5 @@ data class Location(
     @SerializedName("locality")
     val locality: String,
     @SerializedName("long")
-    val long: String
+    val long: String,
 )

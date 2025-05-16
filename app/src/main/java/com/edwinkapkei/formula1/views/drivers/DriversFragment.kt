@@ -1,40 +1,35 @@
 package com.edwinkapkei.formula1.views.drivers
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edwinkapkei.formula1.R
-import com.edwinkapkei.formula1.databinding.FragmentConstructorsBinding
-import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.databinding.FragmentDriversBinding
-import com.edwinkapkei.formula1.databinding.FragmentScheduleBinding
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
+import com.edwinkapkei.formula1.utilities.RequestState
 import com.edwinkapkei.formula1.views.drivers.adapter.DriversAdapter
 import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModel
-import com.edwinkapkei.formula1.views.viewmodel.CurrentDriversViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
-
     @Inject
     lateinit var driversAdapter: DriversAdapter
 
     private val currentDriversViewModel: CurrentDriversViewModel by viewModels()
     private var _binding: FragmentDriversBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.e("onCreate")
@@ -42,15 +37,19 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDriversBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
@@ -68,8 +67,8 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.driversRecycler.addItemDecoration(
             DividerItemDecoration(
                 context,
-                DividerItemDecoration.VERTICAL
-            )
+                DividerItemDecoration.VERTICAL,
+            ),
         )
     }
 
@@ -89,7 +88,7 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     Snackbar.make(
                         binding.root,
                         response.e.message.toString(),
-                        Snackbar.LENGTH_SHORT
+                        Snackbar.LENGTH_SHORT,
                     ).show()
                 }
                 is RequestState.Loading -> {
@@ -125,5 +124,4 @@ class DriversFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDestroyView()
         _binding = null
     }
-
 }

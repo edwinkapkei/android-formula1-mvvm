@@ -19,11 +19,12 @@ class F1APIServiceTest {
     @Before
     fun setup() {
         mockWebServer = MockWebServer()
-        f1APIService = Retrofit.Builder()
-            .baseUrl(mockWebServer.url(""))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(F1APIService::class.java)
+        f1APIService =
+            Retrofit.Builder()
+                .baseUrl(mockWebServer.url(""))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(F1APIService::class.java)
     }
 
     private fun enqueueMockResponse(filename: String) {
@@ -38,9 +39,8 @@ class F1APIServiceTest {
     fun getCurrentSchedule_sentRequest_receivedExpected() {
         runBlocking {
             enqueueMockResponse("current_schedule.json")
-            val responseBody = f1APIService.getCurrentSchedule().body()
+            val responseBody = f1APIService.getCurrentSchedule("2022").body()
             val request = mockWebServer.takeRequest()
-
 
             assertThat(responseBody).isNotNull()
             assertThat(request.path).isEqualTo("/api/f1/2023.json")
@@ -51,10 +51,10 @@ class F1APIServiceTest {
     fun getCurrentSchedule_sentRequest_receivedCorrectContent() {
         runBlocking {
             enqueueMockResponse("current_schedule.json")
-            val responseBody = f1APIService.getCurrentSchedule().body()
+            val responseBody = f1APIService.getCurrentSchedule("2022").body()
 
             assertThat(responseBody).isNotNull()
-            val races =responseBody!!.mRData.raceTable.races
+            val races = responseBody!!.mRData.raceTable.races
             val race = races[0]
 
             assertThat(race.raceName).isEqualTo("Bahrain Grand Prix")
@@ -66,9 +66,8 @@ class F1APIServiceTest {
     fun getCurrentDrivers_sentRequest_receivedExpected() {
         runBlocking {
             enqueueMockResponse("current_drivers.json")
-            val responseBody = f1APIService.getCurrentDrivers().body()
+            val responseBody = f1APIService.getCurrentDrivers("2022").body()
             val request = mockWebServer.takeRequest()
-
 
             assertThat(responseBody).isNotNull()
             assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
@@ -79,10 +78,10 @@ class F1APIServiceTest {
     fun getCurrentDrivers_sentRequest_receivedCorrectContent() {
         runBlocking {
             enqueueMockResponse("current_drivers.json")
-            val responseBody = f1APIService.getCurrentDrivers().body()
+            val responseBody = f1APIService.getCurrentDrivers("2022").body()
 
             assertThat(responseBody).isNotNull()
-            val drivers =responseBody!!.mRData.standingsTable.standingsLists[0].driverStandings
+            val drivers = responseBody!!.mRData.standingsTable.standingsLists[0].driverStandings
             val driver = drivers[18]
             val driver2 = drivers[5]
 
@@ -97,22 +96,22 @@ class F1APIServiceTest {
     fun getCurrentDriverStandings_sentRequest_receivedExpected() {
         runBlocking {
             enqueueMockResponse("current_drivers.json")
-            val responseBody = f1APIService.getCurrentDrivers().body()
+            val responseBody = f1APIService.getCurrentDrivers("2022").body()
             val request = mockWebServer.takeRequest()
-
 
             assertThat(responseBody).isNotNull()
             assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
         }
     }
+
     @Test
     fun getCurrentConstructors_sentRequest_receivedCorrectContent() {
         runBlocking {
             enqueueMockResponse("current_constructors.json")
-            val responseBody = f1APIService.getCurrentConstructors().body()
+            val responseBody = f1APIService.getCurrentConstructors("2022").body()
 
             assertThat(responseBody).isNotNull()
-            val constructors =responseBody!!.mRData.standingsTable.standingsLists[0].constructorStandings
+            val constructors = responseBody!!.mRData.standingsTable.standingsLists[0].constructorStandings
             val team = constructors[1]
 
             assertThat(team.points).isEqualTo("554")

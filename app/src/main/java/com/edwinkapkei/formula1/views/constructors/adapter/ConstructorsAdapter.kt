@@ -13,28 +13,30 @@ import com.edwinkapkei.formula1.databinding.ListItemConstructorBinding
 import java.util.*
 
 class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.ConstructorsViewHolder>() {
-    private val callback = object : DiffUtil.ItemCallback<ConstructorAndTeamCarImage>() {
-        override fun areContentsTheSame(
-            oldItem: ConstructorAndTeamCarImage,
-            newItem: ConstructorAndTeamCarImage
-        ): Boolean {
-            return oldItem == newItem
-        }
+    private val callback =
+        object : DiffUtil.ItemCallback<ConstructorAndTeamCarImage>() {
+            override fun areContentsTheSame(
+                oldItem: ConstructorAndTeamCarImage,
+                newItem: ConstructorAndTeamCarImage,
+            ): Boolean {
+                return oldItem == newItem
+            }
 
-        override fun areItemsTheSame(
-            oldItem: ConstructorAndTeamCarImage,
-            newItem: ConstructorAndTeamCarImage
-        ): Boolean {
-            return oldItem.constructorStanding.constructor.constructorId == newItem
-                .constructorStanding.constructor.constructorId
+            override fun areItemsTheSame(
+                oldItem: ConstructorAndTeamCarImage,
+                newItem: ConstructorAndTeamCarImage,
+            ): Boolean {
+                return oldItem.constructorStanding.constructor.constructorId ==
+                    newItem
+                        .constructorStanding.constructor.constructorId
+            }
         }
-    }
 
     val differ = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ConstructorsAdapter.ConstructorsViewHolder {
         val binding =
             ListItemConstructorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -44,9 +46,9 @@ class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.Constructor
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
         holder: ConstructorsAdapter.ConstructorsViewHolder,
-        position: Int
+        position: Int,
     ) {
-        val constructor = differ.currentList[position] 
+        val constructor = differ.currentList[position]
 
         holder.binding.position.text = constructor.constructorStanding.position
         holder.binding.name.text = constructor.constructorStanding.constructor.name

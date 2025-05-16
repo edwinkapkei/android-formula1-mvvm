@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.driver
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Driver(
@@ -19,5 +18,5 @@ data class Driver(
     @SerializedName("permanentNumber")
     val permanentNumber: String,
     @SerializedName("url")
-    val url: String
+    val url: String,
 )

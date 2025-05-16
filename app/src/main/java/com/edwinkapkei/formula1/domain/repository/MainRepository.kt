@@ -6,7 +6,6 @@ import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.utilities.RequestState
 
 interface MainRepository {
-
     suspend fun getCurrentSchedule(year: String): RequestState<ScheduleResponse>
 
     suspend fun getCurrentDrivers(year: String): RequestState<DriversResponse>

@@ -7,9 +7,8 @@ import com.edwinkapkei.formula1.utilities.RequestState
 
 class GetCurrentConstructorsUseCase(
     private val mainRepository: MainRepository,
-    private val teamCarPhotosUseCase: GetCurrentTeamCarPhotosUseCase
+    private val teamCarPhotosUseCase: GetCurrentTeamCarPhotosUseCase,
 ) {
-
     suspend fun execute(year: String): RequestState<List<ConstructorAndTeamCarImage>> {
         val teamCarPhotos = teamCarPhotosUseCase.execute(year)
         val constructorResponse = mainRepository.getCurrentConstructors(year)
@@ -21,14 +20,13 @@ class GetCurrentConstructorsUseCase(
                     constructorList.add(
                         ConstructorAndTeamCarImage(
                             constructor,
-                            teamCarPhotos[constructor.constructor.constructorId] ?: ""
-                        )
+                            teamCarPhotos[constructor.constructor.constructorId] ?: "",
+                        ),
                     )
                 }
             } else {
                 return requestPreviousYear()
             }
-
         }
 
         return RequestState.Success(constructorList)
@@ -43,8 +41,8 @@ class GetCurrentConstructorsUseCase(
                 constructorList.add(
                     ConstructorAndTeamCarImage(
                         constructor,
-                        teamCarPhotos[constructor.constructor.constructorId] ?: ""
-                    )
+                        teamCarPhotos[constructor.constructor.constructorId] ?: "",
+                    ),
                 )
             }
         }

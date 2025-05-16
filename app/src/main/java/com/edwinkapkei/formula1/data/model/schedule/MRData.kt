@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-
 import com.google.gson.annotations.SerializedName
 
 data class MRData(
@@ -17,5 +16,5 @@ data class MRData(
     @SerializedName("url")
     val url: String,
     @SerializedName("xmlns")
-    val xmlns: String
+    val xmlns: String,
 )

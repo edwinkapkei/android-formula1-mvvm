@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class RepositoryModule {
-
     @Singleton
     @Provides
     fun provideMainRepository(f1RemoteDataSource: F1RemoteDataSource): MainRepository {

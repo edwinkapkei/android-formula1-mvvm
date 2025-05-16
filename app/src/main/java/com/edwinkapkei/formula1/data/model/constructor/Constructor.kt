@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.data.model.constructor
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Constructor(
@@ -11,5 +10,5 @@ data class Constructor(
     @SerializedName("nationality")
     val nationality: String,
     @SerializedName("url")
-    val url: String
+    val url: String,
 )
