@@ -9,12 +9,12 @@ import retrofit2.http.Path
 
 interface F1APIService {
 
-    @GET("api/f1/{YEAR}.json")
+    @GET("f1/{YEAR}/races/?format=json")
     suspend fun getCurrentSchedule(@Path("YEAR") year: String): Response<ScheduleResponse>
 
-    @GET("api/f1/{YEAR}/driverStandings.json")
+    @GET("f1/{YEAR}/driverstandings/?format=json")
     suspend fun getCurrentDrivers(@Path("YEAR") year: String): Response<DriversResponse>
 
-    @GET("api/f1/{YEAR}/constructorStandings.json")
+    @GET("f1/{YEAR}/constructorstandings/?format=json")
     suspend fun getCurrentConstructors(@Path("YEAR") year: String): Response<ConstructorsResponse>
 }

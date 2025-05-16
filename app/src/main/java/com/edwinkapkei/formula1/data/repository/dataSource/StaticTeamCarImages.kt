@@ -14,10 +14,10 @@ object StaticTeamCarImages {
                     "https://media.formula1.com/content/dam/fom-website/teams/$year/alpine-left.png",
             "haas" to
                     "https://media.formula1.com/content/dam/fom-website/teams/$year/haas-f1-team-left.png",
-            "alfa" to
-                    "https://media.formula1.com/content/dam/fom-website/teams/$year/alfa-romeo-racing-left.png",
-            "alphatauri" to
-                    "https://media.formula1.com/content/dam/fom-website/teams/$year/alphatauri-left.png",
+            "sauber" to
+                    "https://media.formula1.com/content/dam/fom-website/teams/$year/kick-sauber-left.png",
+            "rb" to
+                    "https://media.formula1.com/content/dam/fom-website/teams/$year/racing-bulls-left.png",
             "mclaren" to
                     "https://media.formula1.com/content/dam/fom-website/teams/$year/mclaren-left.png",
             "aston_martin" to

@@ -23,7 +23,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .client(getOkhttpClientBuilder().build())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://ergast.com/")
+            .baseUrl("https://api.jolpi.ca/ergast/")
             .build()
     }
 
