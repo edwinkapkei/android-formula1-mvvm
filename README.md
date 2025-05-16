@@ -2,7 +2,7 @@ As a big fan of Formula1 I decided to build an app with basic information about 
 
 The purpose of this project is to help me get a deeper understanding to to approaches of clean architecture. The app is written in Kotlin.
 
-This app uses the Ergast Motor Racing API (https://ergast.com/) for information on races, drivers and teams. A big thank you to Ergast developers for providing the data.
+This app uses the Jolpica Motor Racing API (https://github.com/jolpica/jolpica-f1) for information on races, drivers and teams. A big thank you to Jolpica developers for providing the data.
 
 The app also borrows from the BoxBox Formula1 app (https://github.com/BrightDV/BoxBox) so a big thank you to the developers.
 
