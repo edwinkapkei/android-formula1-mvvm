@@ -43,7 +43,7 @@ class F1APIServiceTest {
             val request = mockWebServer.takeRequest()
 
             assertThat(responseBody).isNotNull()
-            assertThat(request.path).isEqualTo("/api/f1/2023.json")
+            assertThat(request.path).isEqualTo("/f1/2022/races/?format=json")
         }
     }
 
@@ -70,7 +70,7 @@ class F1APIServiceTest {
             val request = mockWebServer.takeRequest()
 
             assertThat(responseBody).isNotNull()
-            assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
+            assertThat(request.path).isEqualTo("/f1/2022/driverstandings/?format=json")
         }
     }
 
@@ -100,7 +100,7 @@ class F1APIServiceTest {
             val request = mockWebServer.takeRequest()
 
             assertThat(responseBody).isNotNull()
-            assertThat(request.path).isEqualTo("/api/f1/current/driverStandings.json")
+            assertThat(request.path).isEqualTo("/f1/2022/driverstandings/?format=json")
         }
     }
 
