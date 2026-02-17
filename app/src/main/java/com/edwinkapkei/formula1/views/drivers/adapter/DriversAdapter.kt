@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.data.model.driver.DriverAndImage
 import com.edwinkapkei.formula1.databinding.ListItemDriverBinding
-import java.util.*
 
 class DriversAdapter : RecyclerView.Adapter<DriversAdapter.DriversViewHolder>() {
     private val callback =

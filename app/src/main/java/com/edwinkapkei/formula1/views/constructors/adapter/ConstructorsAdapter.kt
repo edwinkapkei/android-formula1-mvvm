@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorAndTeamCarImage
 import com.edwinkapkei.formula1.databinding.ListItemConstructorBinding
-import java.util.*
 
 class ConstructorsAdapter : RecyclerView.Adapter<ConstructorsAdapter.ConstructorsViewHolder>() {
     private val callback =

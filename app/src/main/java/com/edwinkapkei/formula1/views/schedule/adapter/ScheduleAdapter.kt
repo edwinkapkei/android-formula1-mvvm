@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edwinkapkei.formula1.data.model.schedule.Race
 import com.edwinkapkei.formula1.databinding.ListItemScheduleBinding
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
     private val callback =
