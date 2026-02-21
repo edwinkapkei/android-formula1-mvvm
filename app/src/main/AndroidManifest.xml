@@ -16,13 +16,23 @@
         android:theme="@style/Theme.Formula1"
         tools:targetApi="31">
         <activity
-            android:name=".views.MainActivity"
-            android:exported="true">
+            android:name=".views.ComposeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/Theme.Formula1" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.MainActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".views.DashboardActivity"
+            android:exported="false">
         </activity>
     </application>
 
