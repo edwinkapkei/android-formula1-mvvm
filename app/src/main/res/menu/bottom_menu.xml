@@ -11,5 +11,5 @@
     <item
         android:id="@+id/constructorsFragment"
         android:icon="@drawable/account_group"
-        android:title="@string/standings" />
+        android:title="@string/teams" />
 </menu>

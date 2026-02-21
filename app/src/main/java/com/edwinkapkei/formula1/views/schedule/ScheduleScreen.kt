@@ -7,13 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -86,37 +91,49 @@ fun ScheduleList(races: List<Race>) {
             val dayFormat = SimpleDateFormat("dd", Locale.getDefault())
             val monthFormat = SimpleDateFormat("MMM", Locale.getDefault())
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                date?.let {
-                    val day = dayFormat.format(it)
-                    val month = monthFormat.format(it)
-                    ElevatedCard {
-                        Column(
-                            modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
+            Column {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    date?.let {
+                        val day = dayFormat.format(it)
+                        val month = monthFormat.format(it)
+                        ElevatedCard(
+                            shape = RoundedCornerShape(corner = CornerSize(4.dp)),
+                            elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White
+                            )
                         ) {
-                            Text(day)
-                            Text(month)
+                            Column(
+                                modifier = Modifier.padding(vertical = 8.dp, horizontal = 14.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(day)
+                                Text(month)
+                            }
                         }
                     }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(race.circuit.location.country)
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(race.raceName)
+                    }
                 }
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(race.circuit.location.country)
-                    Text(race.raceName)
-                }
+
+                HorizontalDivider(color = Color(0xFFE2E2E2))
             }
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewScheduleList() {

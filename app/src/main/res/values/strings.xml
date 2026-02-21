@@ -2,7 +2,7 @@
     <string name="app_name">Formula 1</string>
     <string name="schedule">Schedule</string>
     <string name="drivers">Drivers</string>
-    <string name="standings">Teams</string>
+    <string name="teams">Teams</string>
     <string name="points">%s Points</string>
     <string name="title_activity_compose">ComposeActivity</string>
 </resources>
