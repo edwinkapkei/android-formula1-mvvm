@@ -85,6 +85,12 @@ class ScheduleViewModel @Inject constructor(
             }
         }
 
+    fun clearError() {
+        _uiState.update { currentState ->
+            currentState.copy(error = null)
+        }
+    }
+
     data class UiState(
         val isLoading: Boolean = false,
         val races: List<Race> = emptyList(),

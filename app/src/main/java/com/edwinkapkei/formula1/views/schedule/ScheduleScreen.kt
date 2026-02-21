@@ -33,6 +33,7 @@ import com.edwinkapkei.formula1.data.model.schedule.SecondPractice
 import com.edwinkapkei.formula1.data.model.schedule.Sprint
 import com.edwinkapkei.formula1.data.model.schedule.ThirdPractice
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
+import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
 import com.edwinkapkei.formula1.views.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat
@@ -49,10 +50,19 @@ fun ScheduleScreen(
         viewModel.getCurrentSchedule(getCurrentYear())
     }
 
-    if (uiState.isLoading) {
-        LoadingScreen()
-    } else {
-        ScheduleList(uiState.races)
+    Column(modifier = Modifier.fillMaxSize()) {
+        if (uiState.isLoading) {
+            LoadingScreen()
+        } else {
+            ScheduleList(uiState.races)
+        }
+    }
+
+    uiState.error?.let { message ->
+        ErrorDialog(
+            errorMessage = message,
+            onDismiss = { viewModel.clearError() }
+        )
     }
 }
 
