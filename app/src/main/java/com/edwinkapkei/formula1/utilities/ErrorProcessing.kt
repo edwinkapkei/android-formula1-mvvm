@@ -1,21 +1,6 @@
 package com.edwinkapkei.formula1.utilities
 
-import android.view.View
-import com.google.android.material.snackbar.Snackbar
-
 object ErrorProcessing {
-    fun processHttpErrorCodes(
-        code: Int,
-        message: String? = null,
-        view: View
-    ) {
-        Snackbar.make(
-            view,
-            getErrorMessage(code, message),
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
-
     fun getErrorMessage(
         code: Int,
         message: String? = null

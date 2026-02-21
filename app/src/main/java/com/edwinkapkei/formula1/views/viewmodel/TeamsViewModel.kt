@@ -1,10 +1,8 @@
 package com.edwinkapkei.formula1.views.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorAndTeamCarImage
-import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentConstructorsUseCase
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.utilities.RequestState
@@ -23,8 +21,6 @@ class TeamsViewModel(
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-
-    val currentSchedule: MutableLiveData<RequestState<ScheduleResponse>> = MutableLiveData()
 
     fun getCurrentTeams(year: String) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -73,7 +69,6 @@ class TeamsViewModel(
                 _uiState.update { currentState ->
                     currentState.copy(isLoading = false, error = e.message)
                 }
-                currentSchedule.postValue(RequestState.Exception(e))
             }
         }
 
