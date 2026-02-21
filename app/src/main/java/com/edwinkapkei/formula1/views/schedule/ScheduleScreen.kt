@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.views.schedule
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -81,9 +80,7 @@ fun ScheduleScreen(
 @Composable
 fun ScheduleList(races: List<Race>) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White)
+        modifier = Modifier.fillMaxSize()
     ) {
         items(races) { race ->
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -105,12 +102,16 @@ fun ScheduleList(races: List<Race>) {
                             shape = RoundedCornerShape(corner = CornerSize(4.dp)),
                             elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color.White
+                                containerColor = MaterialTheme.colorScheme.surface
                             )
                         ) {
                             Column(
-                                modifier = Modifier.padding(vertical = 8.dp, horizontal = 14.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                modifier = Modifier
+                                    .padding(vertical = 8.dp, horizontal = 14.dp)
+                                    .height(48.dp)
+                                    .width(36.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
                             ) {
                                 Text(day)
                                 Text(month)

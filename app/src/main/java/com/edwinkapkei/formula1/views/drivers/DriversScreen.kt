@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.views.drivers
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -77,9 +76,7 @@ fun DriversScreen(
 @Composable
 fun DriversList(drivers: List<DriverAndImage>) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White)
+        modifier = Modifier.fillMaxSize()
     ) {
         itemsIndexed(drivers) { index, driver ->
             Column {

@@ -1,6 +1,5 @@
 package com.edwinkapkei.formula1.views.constructors
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -72,9 +70,7 @@ fun TeamsScreen(
 @Composable
 fun TeamsList(teams: List<ConstructorAndTeamCarImage>) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White)
+        modifier = Modifier.fillMaxSize()
     ) {
         itemsIndexed(teams) { index, team ->
             Column {
@@ -103,7 +99,7 @@ fun TeamsList(teams: List<ConstructorAndTeamCarImage>) {
                         )
                     }
                     AsyncImage(
-                        modifier = Modifier.size(80.dp),
+                        modifier = Modifier.height(80.dp).width(120.dp),
                         model = team.teamCarImageUrl,
                         contentDescription = "team car image",
                         placeholder = painterResource(R.drawable.steering_blue)

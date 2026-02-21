@@ -13,6 +13,7 @@ private val DarkColorScheme =
         onPrimary = Color.White,
         surface = ThemeColors.Night.surface,
         background = ThemeColors.Night.background,
+        onBackground = ThemeColors.Night.text,
         secondary = ThemeColors.Night.secondary,
         onSecondary = Color.White
     )
@@ -24,6 +25,7 @@ private val LightColorScheme =
         surface = ThemeColors.Day.surface,
         background = ThemeColors.Day.background,
         secondary = ThemeColors.Day.secondary,
+        onBackground = ThemeColors.Day.text,
         onSecondary = Color.White
     )
 
