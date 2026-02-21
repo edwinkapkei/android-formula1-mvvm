@@ -18,17 +18,19 @@ val networkModule = module {
         HttpClient(Android) {
             install(Logging) {
                 logger = object : Logger {
-                override fun log(message: String) {
-                    Timber.tag("ktor").i(message)
+                    override fun log(message: String) {
+                        Timber.tag("ktor").i(message)
+                    }
                 }
-            }
                 level = LogLevel.ALL
             }
             install(ContentNegotiation) {
-                json(Json {
-                    ignoreUnknownKeys = true
-                    isLenient = true
-                })
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        isLenient = true
+                    }
+                )
             }
             defaultRequest {
                 url("https://api.jolpi.ca/ergast/")

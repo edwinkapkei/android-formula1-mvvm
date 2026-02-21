@@ -1,10 +1,6 @@
 package com.edwinkapkei.formula1.data.api
 
-import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
-import com.edwinkapkei.formula1.data.model.driver.DriversResponse
-import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
