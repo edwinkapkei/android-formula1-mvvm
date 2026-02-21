@@ -2,7 +2,7 @@ package com.edwinkapkei.formula1.views.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryBlue = Color(0xFF2CBDF3)
+val PrimaryBlue = Color(0xFF0B99CD)
 val Gray = Color(0XFF121212)
 val LightGray = Color(0xFF313131)
 
