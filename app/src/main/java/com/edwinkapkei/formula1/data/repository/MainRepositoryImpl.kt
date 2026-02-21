@@ -8,55 +8,25 @@ import com.edwinkapkei.formula1.data.repository.dataSource.StaticDriverImages
 import com.edwinkapkei.formula1.data.repository.dataSource.StaticTeamCarImages
 import com.edwinkapkei.formula1.domain.repository.MainRepository
 import com.edwinkapkei.formula1.utilities.RequestState
-import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.plugins.RedirectResponseException
-import io.ktor.client.plugins.ServerResponseException
 
 class MainRepositoryImpl(
     private val f1RemoteDataSource: F1RemoteDataSource
 ) : MainRepository {
     override suspend fun getCurrentSchedule(year: String): RequestState<ScheduleResponse> {
-        return try {
-            val response = f1RemoteDataSource.getCurrentSchedule(year)
-            RequestState.Success(response)
-        } catch (e: RedirectResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ClientRequestException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ServerResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: Exception) {
-            RequestState.Exception(e)
+        return RequestState.safeApiCall {
+            f1RemoteDataSource.getCurrentSchedule(year)
         }
     }
 
     override suspend fun getCurrentDrivers(year: String): RequestState<DriversResponse> {
-        return try {
-            val response = f1RemoteDataSource.getCurrentDrivers(year)
-            RequestState.Success(response)
-        } catch (e: RedirectResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ClientRequestException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ServerResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: Exception) {
-            RequestState.Exception(e)
+        return RequestState.safeApiCall {
+            f1RemoteDataSource.getCurrentDrivers(year)
         }
     }
 
     override suspend fun getCurrentConstructors(year: String): RequestState<ConstructorsResponse> {
-        return try {
-            val response = f1RemoteDataSource.getCurrentConstructors(year)
-            RequestState.Success(response)
-        } catch (e: RedirectResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ClientRequestException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: ServerResponseException) {
-            RequestState.Error(code = e.response.status.value, message = e.response.status.description)
-        } catch (e: Exception) {
-            RequestState.Exception(e)
+        return RequestState.safeApiCall {
+            f1RemoteDataSource.getCurrentConstructors(year)
         }
     }
 
