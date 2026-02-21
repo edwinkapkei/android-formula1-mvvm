@@ -13,7 +13,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,6 +41,7 @@ import com.edwinkapkei.formula1.views.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleScreen(
     viewModel: ScheduleViewModel = hiltViewModel()
@@ -50,8 +53,12 @@ fun ScheduleScreen(
         viewModel.getCurrentSchedule(getCurrentYear())
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        if (uiState.isLoading) {
+    PullToRefreshBox(
+        isRefreshing = uiState.isLoading && uiState.races.isNotEmpty(),
+        onRefresh = { viewModel.getCurrentSchedule(getCurrentYear()) },
+        modifier = Modifier.fillMaxSize()
+    ) {
+        if (uiState.isLoading && uiState.races.isEmpty()) {
             LoadingScreen()
         } else {
             ScheduleList(uiState.races)
