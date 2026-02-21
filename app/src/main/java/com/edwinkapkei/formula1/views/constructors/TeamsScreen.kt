@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -93,13 +94,17 @@ fun TeamsList(teams: List<ConstructorAndTeamCarImage>) {
                     Column(
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(text = team.constructorStanding.constructor.name)
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = team.constructorStanding.constructor.name,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = stringResource(
                                 R.string.points,
                                 team.constructorStanding.points
-                            )
+                            ),
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                     AsyncImage(

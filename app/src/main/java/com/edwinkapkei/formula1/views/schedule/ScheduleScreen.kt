@@ -19,6 +19,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -42,6 +43,7 @@ import com.edwinkapkei.formula1.data.model.schedule.ThirdPractice
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
+import com.edwinkapkei.formula1.views.theme.Formula1Theme
 import com.edwinkapkei.formula1.views.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -122,9 +124,12 @@ fun ScheduleList(races: List<Race>) {
                         modifier = Modifier.weight(1f),
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(race.circuit.location.country)
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(race.raceName)
+                        Text(
+                            text = race.circuit.location.country,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(text = race.raceName, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
 
@@ -137,7 +142,9 @@ fun ScheduleList(races: List<Race>) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewScheduleList() {
-    ScheduleList(races = getSchedule())
+    Formula1Theme {
+        ScheduleList(races = getSchedule())
+    }
 }
 
 fun getSchedule(): List<Race> {

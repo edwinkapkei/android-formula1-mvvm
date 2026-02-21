@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -44,6 +45,7 @@ import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
 import com.edwinkapkei.formula1.views.schedule.getSchedule
+import com.edwinkapkei.formula1.views.theme.Formula1Theme
 import com.edwinkapkei.formula1.views.viewmodel.DriversViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,7 +88,7 @@ fun DriversList(drivers: List<DriverAndImage>) {
             .background(color = Color.White)
     ) {
         itemsIndexed(drivers) { index, driver ->
-            Column{
+            Column {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -98,9 +100,13 @@ fun DriversList(drivers: List<DriverAndImage>) {
                     Column(
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(text = "${driver.driverStanding.driver.givenName} ${driver.driverStanding.driver.familyName}")
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(text = stringResource(R.string.points, driver.driverStanding.points))
+                        Text(
+                            text = "${driver.driverStanding.driver.givenName} ${driver.driverStanding.driver.familyName}",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(text = stringResource(R.string.points, driver.driverStanding.points),
+                            style = MaterialTheme.typography.bodyMedium)
                     }
                     AsyncImage(
                         modifier = Modifier.size(80.dp),
@@ -118,7 +124,9 @@ fun DriversList(drivers: List<DriverAndImage>) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewDriversList() {
-    DriversList(drivers = getSampleDrivers())
+    Formula1Theme {
+        DriversList(drivers = getSampleDrivers())
+    }
 }
 
 fun getSampleDrivers(): List<DriverAndImage> {
