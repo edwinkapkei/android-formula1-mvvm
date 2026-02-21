@@ -12,3 +12,7 @@ Currently the app has three screens:
 - Teams/Constructors
 
 The project is under development and I will be adding new features and making improvements to the UI
+
+Changes 
+- Migrated from Views to Compose
+- Next: Switch from Hilt to Koin, Retrofit to Ktor
