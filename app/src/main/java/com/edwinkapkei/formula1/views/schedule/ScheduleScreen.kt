@@ -51,9 +51,9 @@ fun ScheduleScreen(
 
     if (uiState.isLoading) {
         LoadingScreen()
+    } else {
+        ScheduleList(uiState.races)
     }
-
-    ScheduleList(uiState.races)
 }
 
 @Composable
