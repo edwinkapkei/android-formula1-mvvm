@@ -1,7 +1,6 @@
 package com.edwinkapkei.formula1.views.drivers
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -40,11 +37,9 @@ import com.edwinkapkei.formula1.data.model.constructor.Constructor
 import com.edwinkapkei.formula1.data.model.driver.Driver
 import com.edwinkapkei.formula1.data.model.driver.DriverAndImage
 import com.edwinkapkei.formula1.data.model.driver.DriverStanding
-import com.edwinkapkei.formula1.data.model.schedule.Race
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
-import com.edwinkapkei.formula1.views.schedule.getSchedule
 import com.edwinkapkei.formula1.views.theme.Formula1Theme
 import com.edwinkapkei.formula1.views.viewmodel.DriversViewModel
 
@@ -53,7 +48,6 @@ import com.edwinkapkei.formula1.views.viewmodel.DriversViewModel
 fun DriversScreen(
     viewModel: DriversViewModel = hiltViewModel()
 ) {
-
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -105,8 +99,10 @@ fun DriversList(drivers: List<DriverAndImage>) {
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        Text(text = stringResource(R.string.points, driver.driverStanding.points),
-                            style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            text = stringResource(R.string.points, driver.driverStanding.points),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                     AsyncImage(
                         modifier = Modifier.size(80.dp),

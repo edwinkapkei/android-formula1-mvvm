@@ -8,5 +8,5 @@ data class StandingsLists(
     @SerializedName("round")
     val round: String,
     @SerializedName("season")
-    val season: String,
+    val season: String
 )

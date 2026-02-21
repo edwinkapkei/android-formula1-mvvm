@@ -27,19 +27,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorAndTeamCarImage
-import com.edwinkapkei.formula1.data.model.driver.DriverAndImage
 import com.edwinkapkei.formula1.utilities.CustomDateFormatter.getCurrentYear
 import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
-import com.edwinkapkei.formula1.views.drivers.getSampleDrivers
-import com.edwinkapkei.formula1.views.viewmodel.DriversViewModel
 import com.edwinkapkei.formula1.views.viewmodel.TeamsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,7 +43,6 @@ import com.edwinkapkei.formula1.views.viewmodel.TeamsViewModel
 fun TeamsScreen(
     viewModel: TeamsViewModel = hiltViewModel()
 ) {
-
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {

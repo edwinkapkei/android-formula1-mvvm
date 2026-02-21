@@ -10,5 +10,5 @@ data class Location(
     @SerializedName("locality")
     val locality: String,
     @SerializedName("long")
-    val long: String,
+    val long: String
 )

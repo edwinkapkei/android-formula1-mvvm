@@ -6,5 +6,5 @@ data class Qualifying(
     @SerializedName("date")
     val date: String,
     @SerializedName("time")
-    val time: String,
+    val time: String
 )

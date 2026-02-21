@@ -22,7 +22,7 @@ object StaticTeamCarImages {
             "aston_martin" to
                 "https://media.formula1.com/content/dam/fom-website/teams/$year/aston-martin-left.png",
             "williams" to
-                "https://media.formula1.com/content/dam/fom-website/teams/$year/williams-left.png",
+                "https://media.formula1.com/content/dam/fom-website/teams/$year/williams-left.png"
         )
     }
 }

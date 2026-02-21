@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class DriversResponse(
     @SerializedName("MRData")
-    val mRData: MRData,
+    val mRData: MRData
 )

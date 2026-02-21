@@ -15,5 +15,5 @@ data class DriverStanding(
     @SerializedName("positionText")
     val positionText: String,
     @SerializedName("wins")
-    val wins: String,
+    val wins: String
 )

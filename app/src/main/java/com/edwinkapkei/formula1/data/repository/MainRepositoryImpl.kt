@@ -11,7 +11,7 @@ import com.edwinkapkei.formula1.utilities.RequestState
 import retrofit2.HttpException
 
 class MainRepositoryImpl(
-    private val f1RemoteDataSource: F1RemoteDataSource,
+    private val f1RemoteDataSource: F1RemoteDataSource
 ) : MainRepository {
     override suspend fun getCurrentSchedule(year: String): RequestState<ScheduleResponse> {
         val response = f1RemoteDataSource.getCurrentSchedule(year)

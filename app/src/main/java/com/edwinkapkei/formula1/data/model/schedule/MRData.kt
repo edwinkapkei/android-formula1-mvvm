@@ -16,5 +16,5 @@ data class MRData(
     @SerializedName("url")
     val url: String,
     @SerializedName("xmlns")
-    val xmlns: String,
+    val xmlns: String
 )

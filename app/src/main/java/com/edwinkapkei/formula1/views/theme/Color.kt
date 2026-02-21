@@ -11,14 +11,14 @@ sealed class ThemeColors(
     val surface: Color,
     val primary: Color,
     val secondary: Color,
-    val text: Color,
+    val text: Color
 ) {
     data object Night : ThemeColors(
         background = Gray,
         surface = LightGray,
         primary = PrimaryBlue,
         secondary = PrimaryBlue,
-        text = Color.White,
+        text = Color.White
     )
 
     data object Day : ThemeColors(
@@ -26,6 +26,6 @@ sealed class ThemeColors(
         surface = Color.White,
         primary = PrimaryBlue,
         secondary = PrimaryBlue,
-        text = Color.Black,
+        text = Color.Black
     )
 }

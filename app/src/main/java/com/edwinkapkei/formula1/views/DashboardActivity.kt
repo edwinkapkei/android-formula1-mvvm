@@ -64,7 +64,8 @@ fun DashboardNavigationBar() {
                 title = {
                     Text(
                         text = stringResource(R.string.app_name),
-                        fontSize = 18.sp, fontWeight = FontWeight.Bold
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -97,7 +98,7 @@ fun DashboardNavigationBar() {
         DashboardNavHost(
             navController = navController,
             startDestination = startDestination,
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier.padding(contentPadding)
         )
     }
 }
@@ -111,7 +112,7 @@ fun DashboardNavHost(
     NavHost(
         navController = navController,
         startDestination = startDestination.route,
-        modifier = modifier,
+        modifier = modifier
     ) {
         DashboardRoutes.entries.forEach { destination ->
             composable(destination.route) {
@@ -130,7 +131,6 @@ fun DashboardNavHost(
 fun PreviewDashboardNavigationBar() {
     DashboardNavigationBar()
 }
-
 
 enum class DashboardRoutes(
     val route: String,

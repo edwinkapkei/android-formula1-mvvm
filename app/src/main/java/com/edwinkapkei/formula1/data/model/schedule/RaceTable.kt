@@ -6,5 +6,5 @@ data class RaceTable(
     @SerializedName("Races")
     val races: List<Race>,
     @SerializedName("season")
-    val season: String,
+    val season: String
 )

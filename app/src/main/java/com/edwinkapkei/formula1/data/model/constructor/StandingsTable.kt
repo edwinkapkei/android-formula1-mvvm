@@ -6,5 +6,5 @@ data class StandingsTable(
     @SerializedName("season")
     val season: String,
     @SerializedName("StandingsLists")
-    val standingsLists: List<StandingsLists>,
+    val standingsLists: List<StandingsLists>
 )

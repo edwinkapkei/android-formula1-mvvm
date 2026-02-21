@@ -56,7 +56,6 @@ class ScheduleViewModel @Inject constructor(
                                 )
                             )
                         }
-
                     }
 
                     is RequestState.Exception -> {

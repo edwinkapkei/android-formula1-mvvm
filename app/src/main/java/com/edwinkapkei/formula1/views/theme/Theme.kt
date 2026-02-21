@@ -14,7 +14,7 @@ private val DarkColorScheme =
         surface = ThemeColors.Night.surface,
         background = ThemeColors.Night.background,
         secondary = ThemeColors.Night.secondary,
-        onSecondary = Color.White,
+        onSecondary = Color.White
     )
 
 private val LightColorScheme =
@@ -24,7 +24,7 @@ private val LightColorScheme =
         surface = ThemeColors.Day.surface,
         background = ThemeColors.Day.background,
         secondary = ThemeColors.Day.secondary,
-        onSecondary = Color.White,
+        onSecondary = Color.White
     )
 
 @Composable
@@ -43,6 +43,6 @@ fun Formula1Theme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content,
+        content = content
     )
 }

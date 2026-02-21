@@ -4,10 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edwinkapkei.formula1.data.model.driver.DriverAndImage
-import com.edwinkapkei.formula1.data.model.schedule.Race
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriversUseCase
-import com.edwinkapkei.formula1.domain.usecase.GetCurrentScheduleUseCase
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.utilities.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DriversViewModel @Inject constructor(
-    private val getCurrentDriversUseCase: GetCurrentDriversUseCase,
+    private val getCurrentDriversUseCase: GetCurrentDriversUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -52,7 +50,6 @@ class DriversViewModel @Inject constructor(
                                 )
                             )
                         }
-
                     }
 
                     is RequestState.Exception -> {

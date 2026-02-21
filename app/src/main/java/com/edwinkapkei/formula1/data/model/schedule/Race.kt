@@ -26,5 +26,5 @@ data class Race(
     @SerializedName("time")
     val time: String,
     @SerializedName("url")
-    val url: String,
+    val url: String
 )

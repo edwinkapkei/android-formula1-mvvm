@@ -7,18 +7,18 @@ object ErrorProcessing {
     fun processHttpErrorCodes(
         code: Int,
         message: String? = null,
-        view: View,
+        view: View
     ) {
         Snackbar.make(
             view,
             getErrorMessage(code, message),
-            Snackbar.LENGTH_SHORT,
+            Snackbar.LENGTH_SHORT
         ).show()
     }
 
     fun getErrorMessage(
         code: Int,
-        message: String? = null,
+        message: String? = null
     ): String {
         val errorMessage: String
         when (code) {
@@ -51,5 +51,3 @@ object ErrorProcessing {
         return errorMessage
     }
 }
-
-
