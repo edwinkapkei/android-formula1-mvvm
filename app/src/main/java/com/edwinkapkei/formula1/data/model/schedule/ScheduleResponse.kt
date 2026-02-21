@@ -1,8 +1,10 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ScheduleResponse(
-    @SerializedName("MRData")
+    @SerialName("MRData")
     val mRData: MRData
 )

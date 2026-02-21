@@ -1,16 +1,18 @@
 package com.edwinkapkei.formula1.data.model.constructor
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ConstructorStanding(
-    @SerializedName("Constructor")
-    val `constructor`: Constructor,
-    @SerializedName("points")
+    @SerialName("Constructor")
+    val constructor: Constructor,
+    @SerialName("points")
     val points: String,
-    @SerializedName("position")
+    @SerialName("position")
     val position: String,
-    @SerializedName("positionText")
+    @SerialName("positionText")
     val positionText: String,
-    @SerializedName("wins")
+    @SerialName("wins")
     val wins: String
 )

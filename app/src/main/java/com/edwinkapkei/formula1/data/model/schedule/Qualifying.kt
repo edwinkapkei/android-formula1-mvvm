@@ -1,10 +1,12 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Qualifying(
-    @SerializedName("date")
+    @SerialName("date")
     val date: String,
-    @SerializedName("time")
+    @SerialName("time")
     val time: String
 )

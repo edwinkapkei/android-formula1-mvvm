@@ -1,30 +1,32 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Race(
-    @SerializedName("Circuit")
+    @SerialName("Circuit")
     val circuit: Circuit,
-    @SerializedName("date")
+    @SerialName("date")
     val date: String,
-    @SerializedName("FirstPractice")
-    val firstPractice: FirstPractice,
-    @SerializedName("Qualifying")
-    val qualifying: Qualifying,
-    @SerializedName("raceName")
+    @SerialName("FirstPractice")
+    val firstPractice: FirstPractice? = null,
+    @SerialName("Qualifying")
+    val qualifying: Qualifying? = null,
+    @SerialName("raceName")
     val raceName: String,
-    @SerializedName("round")
+    @SerialName("round")
     val round: String,
-    @SerializedName("season")
+    @SerialName("season")
     val season: String,
-    @SerializedName("SecondPractice")
-    val secondPractice: SecondPractice,
-    @SerializedName("Sprint")
-    val sprint: Sprint?,
-    @SerializedName("ThirdPractice")
-    val thirdPractice: ThirdPractice?,
-    @SerializedName("time")
-    val time: String,
-    @SerializedName("url")
+    @SerialName("SecondPractice")
+    val secondPractice: SecondPractice? = null,
+    @SerialName("Sprint")
+    val sprint: Sprint? = null,
+    @SerialName("ThirdPractice")
+    val thirdPractice: ThirdPractice? = null,
+    @SerialName("time")
+    val time: String? = null,
+    @SerialName("url")
     val url: String
 )

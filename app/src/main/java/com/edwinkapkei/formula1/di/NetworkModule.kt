@@ -1,39 +1,42 @@
 package com.edwinkapkei.formula1.di
 
-import com.edwinkapkei.formula1.BuildConfig
 import com.edwinkapkei.formula1.data.api.F1APIService
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import timber.log.Timber
 
 val networkModule = module {
     single {
-        val timeout = 60L
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder().apply {
-            connectTimeout(timeout, TimeUnit.SECONDS)
-            readTimeout(timeout, TimeUnit.SECONDS)
-            writeTimeout(timeout, TimeUnit.SECONDS)
-            callTimeout(timeout, TimeUnit.SECONDS)
-            if (BuildConfig.DEBUG) {
-                addInterceptor(interceptor)
+        HttpClient(Android) {
+            install(Logging) {
+                logger = object : Logger {
+                override fun log(message: String) {
+                    Timber.tag("ktor").i(message)
+                }
             }
-        }.build()
+                level = LogLevel.ALL
+            }
+            install(ContentNegotiation) {
+                json(Json {
+                    ignoreUnknownKeys = true
+                    isLenient = true
+                })
+            }
+            defaultRequest {
+                url("https://api.jolpi.ca/ergast/")
+            }
+        }
     }
 
     single {
-        Retrofit.Builder()
-            .client(get())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.jolpi.ca/ergast/")
-            .build()
-    }
-
-    single {
-        get<Retrofit>().create(F1APIService::class.java)
+        F1APIService(get())
     }
 }

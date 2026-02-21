@@ -1,19 +1,21 @@
 package com.edwinkapkei.formula1.data.model.driver
 
 import com.edwinkapkei.formula1.data.model.constructor.Constructor
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DriverStanding(
-    @SerializedName("Constructors")
+    @SerialName("Constructors")
     val constructors: List<Constructor>,
-    @SerializedName("Driver")
+    @SerialName("Driver")
     val driver: Driver,
-    @SerializedName("points")
+    @SerialName("points")
     val points: String,
-    @SerializedName("position")
+    @SerialName("position")
     val position: String,
-    @SerializedName("positionText")
+    @SerialName("positionText")
     val positionText: String,
-    @SerializedName("wins")
+    @SerialName("wins")
     val wins: String
 )

@@ -1,14 +1,16 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Location(
-    @SerializedName("country")
+    @SerialName("country")
     val country: String,
-    @SerializedName("lat")
+    @SerialName("lat")
     val lat: String,
-    @SerializedName("locality")
+    @SerialName("locality")
     val locality: String,
-    @SerializedName("long")
+    @SerialName("long")
     val long: String
 )

@@ -1,12 +1,14 @@
 package com.edwinkapkei.formula1.data.model.driver
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class StandingsLists(
-    @SerializedName("DriverStandings")
+    @SerialName("DriverStandings")
     val driverStandings: List<DriverStanding>,
-    @SerializedName("round")
+    @SerialName("round")
     val round: String,
-    @SerializedName("season")
+    @SerialName("season")
     val season: String
 )

@@ -1,22 +1,24 @@
 package com.edwinkapkei.formula1.data.model.driver
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Driver(
-    @SerializedName("code")
-    val code: String,
-    @SerializedName("dateOfBirth")
+    @SerialName("code")
+    val code: String? = null,
+    @SerialName("dateOfBirth")
     val dateOfBirth: String,
-    @SerializedName("driverId")
+    @SerialName("driverId")
     val driverId: String,
-    @SerializedName("familyName")
+    @SerialName("familyName")
     val familyName: String,
-    @SerializedName("givenName")
+    @SerialName("givenName")
     val givenName: String,
-    @SerializedName("nationality")
+    @SerialName("nationality")
     val nationality: String,
-    @SerializedName("permanentNumber")
-    val permanentNumber: String,
-    @SerializedName("url")
+    @SerialName("permanentNumber")
+    val permanentNumber: String? = null,
+    @SerialName("url")
     val url: String
 )

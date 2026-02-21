@@ -1,14 +1,16 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Circuit(
-    @SerializedName("circuitId")
+    @SerialName("circuitId")
     val circuitId: String,
-    @SerializedName("circuitName")
+    @SerialName("circuitName")
     val circuitName: String,
-    @SerializedName("Location")
+    @SerialName("Location")
     val location: Location,
-    @SerializedName("url")
+    @SerialName("url")
     val url: String
 )

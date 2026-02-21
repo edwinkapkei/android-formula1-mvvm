@@ -3,23 +3,21 @@ package com.edwinkapkei.formula1.data.api
 import com.edwinkapkei.formula1.data.model.constructor.ConstructorsResponse
 import com.edwinkapkei.formula1.data.model.driver.DriversResponse
 import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 
-interface F1APIService {
-    @GET("f1/{YEAR}/races/?format=json")
-    suspend fun getCurrentSchedule(
-        @Path("YEAR") year: String
-    ): Response<ScheduleResponse>
+class F1APIService(private val client: HttpClient) {
+    suspend fun getCurrentSchedule(year: String): HttpResponse {
+        return client.get("f1/$year/races/?format=json")
+    }
 
-    @GET("f1/{YEAR}/driverstandings/?format=json")
-    suspend fun getCurrentDrivers(
-        @Path("YEAR") year: String
-    ): Response<DriversResponse>
+    suspend fun getCurrentDrivers(year: String): HttpResponse {
+        return client.get("f1/$year/driverstandings/?format=json")
+    }
 
-    @GET("f1/{YEAR}/constructorstandings/?format=json")
-    suspend fun getCurrentConstructors(
-        @Path("YEAR") year: String
-    ): Response<ConstructorsResponse>
+    suspend fun getCurrentConstructors(year: String): HttpResponse {
+        return client.get("f1/$year/constructorstandings/?format=json")
+    }
 }

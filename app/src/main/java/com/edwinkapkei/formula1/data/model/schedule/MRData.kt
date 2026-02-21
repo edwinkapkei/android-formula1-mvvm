@@ -1,20 +1,22 @@
 package com.edwinkapkei.formula1.data.model.schedule
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MRData(
-    @SerializedName("limit")
+    @SerialName("limit")
     val limit: String,
-    @SerializedName("offset")
+    @SerialName("offset")
     val offset: String,
-    @SerializedName("RaceTable")
+    @SerialName("RaceTable")
     val raceTable: RaceTable,
-    @SerializedName("series")
+    @SerialName("series")
     val series: String,
-    @SerializedName("total")
+    @SerialName("total")
     val total: String,
-    @SerializedName("url")
+    @SerialName("url")
     val url: String,
-    @SerializedName("xmlns")
+    @SerialName("xmlns")
     val xmlns: String
 )

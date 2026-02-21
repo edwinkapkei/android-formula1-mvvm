@@ -1,14 +1,16 @@
 package com.edwinkapkei.formula1.data.model.constructor
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Constructor(
-    @SerializedName("constructorId")
+    @SerialName("constructorId")
     val constructorId: String,
-    @SerializedName("name")
+    @SerialName("name")
     val name: String,
-    @SerializedName("nationality")
+    @SerialName("nationality")
     val nationality: String,
-    @SerializedName("url")
+    @SerialName("url")
     val url: String
 )
