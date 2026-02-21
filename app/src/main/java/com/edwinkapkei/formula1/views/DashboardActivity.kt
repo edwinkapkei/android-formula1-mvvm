@@ -34,9 +34,7 @@ import com.edwinkapkei.formula1.views.constructors.TeamsScreen
 import com.edwinkapkei.formula1.views.drivers.DriversScreen
 import com.edwinkapkei.formula1.views.schedule.ScheduleScreen
 import com.edwinkapkei.formula1.views.theme.Formula1Theme
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class DashboardActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

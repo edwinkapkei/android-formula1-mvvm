@@ -1,53 +1,26 @@
 package com.edwinkapkei.formula1.di
 
-import com.edwinkapkei.formula1.domain.repository.MainRepository
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentConstructorsUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriverPhotosUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriversUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentScheduleUseCase
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentTeamCarPhotosUseCase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@InstallIn(SingletonComponent::class)
-@Module
-class UseCaseModule {
-    @Singleton
-    @Provides
-    fun provideCurrentScheduleUseCase(mainRepository: MainRepository): GetCurrentScheduleUseCase {
-        return GetCurrentScheduleUseCase(mainRepository)
+val useCaseModule = module {
+    single {
+        GetCurrentScheduleUseCase(mainRepository = get())
     }
-
-    @Singleton
-    @Provides
-    fun provideCurrentDriversUseCase(
-        mainRepository: MainRepository,
-        driverPhotosUseCase: GetCurrentDriverPhotosUseCase
-    ): GetCurrentDriversUseCase {
-        return GetCurrentDriversUseCase(mainRepository, driverPhotosUseCase)
+    single {
+        GetCurrentDriversUseCase(mainRepository = get(), driverPhotosUseCase = get())
     }
-
-    @Singleton
-    @Provides
-    fun provideCurrentConstructorsUseCase(
-        mainRepository: MainRepository,
-        teamCarPhotosUseCase: GetCurrentTeamCarPhotosUseCase
-    ): GetCurrentConstructorsUseCase {
-        return GetCurrentConstructorsUseCase(mainRepository, teamCarPhotosUseCase)
+    single {
+        GetCurrentConstructorsUseCase(mainRepository = get(), teamCarPhotosUseCase = get())
     }
-
-    @Singleton
-    @Provides
-    fun provideCurrentDriversPhotosUseCase(mainRepository: MainRepository): GetCurrentDriverPhotosUseCase {
-        return GetCurrentDriverPhotosUseCase(mainRepository)
+    single {
+        GetCurrentDriverPhotosUseCase(mainRepository = get())
     }
-
-    @Singleton
-    @Provides
-    fun provideTeamCarPhotosUseCase(mainRepository: MainRepository): GetCurrentTeamCarPhotosUseCase {
-        return GetCurrentTeamCarPhotosUseCase(mainRepository)
+    single {
+        GetCurrentTeamCarPhotosUseCase(mainRepository = get())
     }
 }

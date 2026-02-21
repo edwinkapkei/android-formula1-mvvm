@@ -8,17 +8,16 @@ import com.edwinkapkei.formula1.data.model.schedule.ScheduleResponse
 import com.edwinkapkei.formula1.domain.usecase.GetCurrentDriversUseCase
 import com.edwinkapkei.formula1.utilities.ErrorProcessing
 import com.edwinkapkei.formula1.utilities.RequestState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
 
-@HiltViewModel
-class DriversViewModel @Inject constructor(
+class DriversViewModel(
     private val getCurrentDriversUseCase: GetCurrentDriversUseCase
 ) : ViewModel() {
 
@@ -89,4 +88,8 @@ class DriversViewModel @Inject constructor(
         val drivers: List<DriverAndImage> = emptyList(),
         val error: String? = null
     )
+}
+
+val driversViewModelModule = module {
+    viewModelOf(::DriversViewModel)
 }

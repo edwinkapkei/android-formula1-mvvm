@@ -30,7 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.edwinkapkei.formula1.R
 import com.edwinkapkei.formula1.data.model.constructor.Constructor
@@ -42,11 +41,12 @@ import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
 import com.edwinkapkei.formula1.views.theme.Formula1Theme
 import com.edwinkapkei.formula1.views.viewmodel.DriversViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DriversScreen(
-    viewModel: DriversViewModel = hiltViewModel()
+    viewModel: DriversViewModel = koinViewModel<DriversViewModel>()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

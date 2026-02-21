@@ -30,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.edwinkapkei.formula1.data.model.schedule.Circuit
 import com.edwinkapkei.formula1.data.model.schedule.FirstPractice
 import com.edwinkapkei.formula1.data.model.schedule.Location
@@ -44,13 +43,14 @@ import com.edwinkapkei.formula1.views.common.ErrorDialog
 import com.edwinkapkei.formula1.views.common.LoadingScreen
 import com.edwinkapkei.formula1.views.theme.Formula1Theme
 import com.edwinkapkei.formula1.views.viewmodel.ScheduleViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleScreen(
-    viewModel: ScheduleViewModel = hiltViewModel()
+    viewModel: ScheduleViewModel = koinViewModel<ScheduleViewModel>()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
