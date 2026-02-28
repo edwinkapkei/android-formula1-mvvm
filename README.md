@@ -15,4 +15,4 @@ The project is under development and I will be adding new features and making im
 
 Changes 
 - Migrated from Views to Compose
-- Next: Switch from Hilt to Koin, Retrofit to Ktor
+- Switched from Hilt to Koin, Retrofit to Ktor
